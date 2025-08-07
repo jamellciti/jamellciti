@@ -4,14 +4,32 @@ import AuthProvider, { useAuth } from '../context/AuthProvider';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ErrorBoundary from '../components/ErrorBoundary';
+// STEP 6 TEST: Import login screen directly
+import LoginScreen from './login';
 
-// Loading component
+// Loading screen component
 const LoadingScreen = () => (
   <View style={styles.loadingContainer}>
-    <ActivityIndicator size="large" color="#00D2FF" />
+    <ActivityIndicator size="large" color="#00CED1" />
   </View>
 );
 
+// STEP 6: Test direct screen render - bypass all routing and context
+export default function RootLayout() {
+  console.log('🗂️ STEP 6 TEST: Rendering direct LoginScreen');
+  return (
+    <ErrorBoundary>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <LoginScreen />
+        </AuthProvider>
+      </SafeAreaProvider>
+    </ErrorBoundary>
+  );
+}
+
+// Original implementation commented out for testing:
+/*
 // App content with official Expo Router auth guard pattern
 const AppContent = () => {
   const { loading, token } = useAuth();
@@ -28,36 +46,10 @@ const AppContent = () => {
       }}
     />
   );
-
-  // Original guard logic commented out for testing:
-  /*
-  // Show loading screen while checking authentication
-  if (loading) {
-    console.log('🚦 Showing loading screen');
-    return <LoadingScreen />;
-  }
-
-  // Redirect to login if no token (official pattern)
-  if (!token) {
-    console.log('🚦 No token, redirecting to login');
-    return <Redirect href="/login" />;
-  }
-
-  // User is authenticated - show app content
-  console.log('🚦 Authenticated, rendering Stack');
-  return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: '#0A0A0A' },
-      }}
-    />
-  );
-  */
 };
 
 // Root layout with providers
-export default function RootLayout() {
+export default function RootLayoutOriginal() {
   console.log('🗂️ Rendering RootLayout');
   return (
     <ErrorBoundary>
@@ -70,6 +62,7 @@ export default function RootLayout() {
     </ErrorBoundary>
   );
 }
+*/
 
 const styles = StyleSheet.create({
   loadingContainer: {
