@@ -150,30 +150,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         error: null,
       });
 
-      // Step 5: Navigate with router.replace (synchronous, cross-platform)
+      // Step 5: 🔥 Force navigation now that authState is settled
       const targetPath = (!userProfile.consent_level || userProfile.consent_level === 'none') 
         ? '/consent-wizard' 
         : '/dashboard';
       
-      // Set navigation flag to prevent bootAuth interference
-      setIsNavigating(true);
-      
       router.replace(targetPath as any);
 
-      // Final 5%: Force URL sync for web to ensure browser location updates immediately
+      // On web, ensure URL bar sync
       if (Platform.OS === 'web') {
-        // Ensure React state and browser history are in sync
         setTimeout(() => {
           window.history.replaceState(null, '', targetPath);
-          // Clear navigation flag after URL sync
-          setIsNavigating(false);
-        }, 100);
-      } else {
-        // Clear navigation flag for native platforms
-        setTimeout(() => setIsNavigating(false), 100);
+        }, 0);
       }
 
     } catch (err: any) {
+      console.error('LOGIN ERROR', err);
       setAuthState(s => ({ 
         ...s, 
         loading: false, 
