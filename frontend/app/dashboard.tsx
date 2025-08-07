@@ -197,7 +197,7 @@ export default function Dashboard() {
             <View style={styles.statusItem}>
               <MaterialIcons name="card-membership" size={16} color="#FFA726" />
               <Text style={styles.statusText}>
-                {userInfo?.subscription_tier?.replace('_', ' ').toUpperCase() || 'FREE'}
+                {user?.subscription_tier?.replace('_', ' ').toUpperCase() || 'FREE'}
               </Text>
             </View>
           </View>
