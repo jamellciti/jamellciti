@@ -19,9 +19,11 @@ import { useAuth } from '../context/AuthProvider';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  
+  // 3️⃣ Use Auth context
+  const { login, loading, error, clearError } = useAuth();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -29,98 +31,29 @@ export default function Login() {
       return;
     }
 
-    setIsLoading(true);
-
+    clearError(); // Clear previous errors
+    
     try {
-      console.log('🔐 Attempting login with:', { email });
-      
-      const data = await authFetcher(endpoints.AUTH_LOGIN, { email, password });
-      
-      console.log('🔐 Login successful, received data:', { 
-        user: data.user.email, 
-        token_preview: data.access_token.slice(0, 12) 
-      });
-
-      // Store auth token and user info using secure storage
-      await storage.setItem('auth_token', data.access_token);
-      await storage.setItem('user_info', JSON.stringify(data.user));
-
-      console.log('✅ Auth data stored successfully');
-      
-      // Debug: verify storage worked
-      await storage.debugKeys();
-
-      // Navigate based on consent level
-      if (!data.user.consent_level || data.user.consent_level === 'none') {
-        console.log('🔄 Redirecting to consent wizard');
-        router.replace('/consent-wizard');
-      } else {
-        console.log('🔄 Redirecting to dashboard');
-        router.replace('/dashboard');
-      }
-        
-    } catch (error) {
-      console.error('❌ Login error:', error);
-      Alert.alert('Login Failed', error.message || 'Network error. Please try again.');
-    } finally {
-      setIsLoading(false);
+      await login(email, password);
+      // Navigation is handled by the login function
+    } catch (err) {
+      // Error handling is managed by AuthProvider
+      console.log('Login handled by AuthProvider');
     }
   };
 
   const handleDemoLogin = async () => {
     console.log('🎯 Demo login triggered');
-    
-    // Set credentials and trigger login immediately
     setEmail('admin@aura.vision');
     setPassword('demo123');
-    setIsLoading(true);
-
+    
+    clearError();
+    
     try {
-      console.log('🔐 Demo login: calling auth API directly');
-      const data = await authFetcher(endpoints.AUTH_LOGIN, { 
-        email: 'admin@aura.vision', 
-        password: 'demo123' 
-      });
-      
-      console.log('🔐 Demo login successful:', { 
-        user: data.user.email, 
-        consent_level: data.user.consent_level,
-        token_preview: data.access_token.slice(0, 12) 
-      });
-
-      // Store auth token and user info
-      await storage.setItem('auth_token', data.access_token);
-      await storage.setItem('user_info', JSON.stringify(data.user));
-
-      console.log('✅ Demo auth data stored successfully');
-      await storage.debugKeys();
-
-      // Use window.location for web compatibility
-      if (typeof window !== 'undefined') {
-        // Navigate based on consent level
-        if (!data.user.consent_level || data.user.consent_level === 'none') {
-          console.log('🔄 Demo: Using window.location to navigate to consent wizard');
-          window.location.href = '/consent-wizard';
-        } else {
-          console.log('🔄 Demo: Using window.location to navigate to dashboard');
-          window.location.href = '/dashboard';
-        }
-      } else {
-        // Fallback to expo router for native
-        if (!data.user.consent_level || data.user.consent_level === 'none') {
-          console.log('🔄 Demo: Using router to navigate to consent wizard');
-          router.replace('/consent-wizard');
-        } else {
-          console.log('🔄 Demo: Using router to navigate to dashboard');
-          router.replace('/dashboard');
-        }
-      }
-        
-    } catch (error) {
-      console.error('❌ Demo login error:', error);
-      Alert.alert('Demo Login Failed', error.message || 'Network error. Please try again.');
-    } finally {
-      setIsLoading(false);
+      await login('admin@aura.vision', 'demo123');
+      // Navigation is handled by the login function
+    } catch (err) {
+      console.log('Demo login handled by AuthProvider');
     }
   };
 
