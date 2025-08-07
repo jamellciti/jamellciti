@@ -1,74 +1,105 @@
 import React from 'react';
-import { Stack, Redirect } from 'expo-router';
+import { Stack, SplashScreen } from 'expo-router';
 import AuthProvider, { useAuth } from '../context/AuthProvider';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ErrorBoundary from '../components/ErrorBoundary';
-// STEP 6 TEST: Import login screen directly
-import LoginScreen from './login';
 
-// Loading screen component
-const LoadingScreen = () => (
-  <View style={styles.loadingContainer}>
-    <ActivityIndicator size="large" color="#00CED1" />
-  </View>
-);
-
-// STEP 6: Test direct screen render - bypass all routing and context
+// Root layout with providers
 export default function RootLayout() {
-  console.log('🗂️ STEP 6 TEST: Rendering direct LoginScreen');
   return (
     <ErrorBoundary>
       <SafeAreaProvider>
         <AuthProvider>
-          <LoginScreen />
+          <InnerLayout />
         </AuthProvider>
       </SafeAreaProvider>
     </ErrorBoundary>
   );
 }
 
-// Original implementation commented out for testing:
-/*
-// App content with official Expo Router auth guard pattern
-const AppContent = () => {
+// Inner layout with auth-aware routing
+function InnerLayout() {
   const { loading, token } = useAuth();
 
-  console.log('🚦 Guard – loading:', loading, 'token:', token);
+  console.log('🗂️ InnerLayout render - loading:', loading, 'token:', !!token);
 
-  // TEMPORARY: Bypass the guard to test if login screen works
-  console.log('🚦 BYPASSING GUARD - Force showing Stack');
+  // Show splash screen while loading
+  if (loading) {
+    console.log('🗂️ Showing SplashScreen during loading');
+    return <SplashScreen />;
+  }
+
+  console.log('🗂️ Rendering Stack with explicit screen registration');
+  
   return (
     <Stack
       screenOptions={{
         headerShown: false,
         contentStyle: { backgroundColor: '#0A0A0A' },
       }}
-    />
-  );
-};
+    >
+      {/* Public screens - always available */}
+      <Stack.Screen 
+        name="login" 
+        options={{ headerShown: false }} 
+      />
+      <Stack.Screen 
+        name="register" 
+        options={{ headerShown: false }} 
+      />
+      <Stack.Screen 
+        name="index" 
+        options={{ headerShown: false }} 
+      />
 
-// Root layout with providers
-export default function RootLayoutOriginal() {
-  console.log('🗂️ Rendering RootLayout');
-  return (
-    <ErrorBoundary>
-      <SafeAreaProvider>
-        <AuthProvider>
-          {console.log('🗂️ Inside AuthProvider wrapper')}
-          <AppContent />
-        </AuthProvider>
-      </SafeAreaProvider>
-    </ErrorBoundary>
+      {/* Protected screens - only when authenticated */}
+      {token && (
+        <>
+          <Stack.Screen 
+            name="dashboard" 
+            options={{ 
+              title: 'Dashboard',
+              headerShown: false 
+            }} 
+          />
+          <Stack.Screen 
+            name="trust" 
+            options={{ 
+              title: 'Trust & Privacy',
+              headerShown: false 
+            }} 
+          />
+          <Stack.Screen 
+            name="settings" 
+            options={{ 
+              title: 'Settings',
+              headerShown: false 
+            }} 
+          />
+          <Stack.Screen 
+            name="consent-wizard" 
+            options={{ 
+              title: 'Privacy Settings',
+              headerShown: false 
+            }} 
+          />
+          <Stack.Screen 
+            name="dev-tiles" 
+            options={{ 
+              title: 'Dev Tiles',
+              headerShown: false 
+            }} 
+          />
+        </>
+      )}
+
+      {/* Fallback: ensure login is always available if no token */}
+      {!token && (
+        <Stack.Screen 
+          name="login" 
+          options={{ headerShown: false }} 
+        />
+      )}
+    </Stack>
   );
 }
-*/
-
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    backgroundColor: '#0A0A0A',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
