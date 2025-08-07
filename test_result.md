@@ -180,11 +180,11 @@ backend:
 frontend:
   - task: "Authentication Flow (Login/Register)"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/app/login.tsx, /app/frontend/app/register.tsx, /app/frontend/app/index.tsx"
     stuck_count: 1
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
@@ -192,9 +192,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "CRITICAL ISSUE: UI components work perfectly (landing page loads, navigation to login works, form elements visible, demo button present), but authentication integration fails. Demo login button fills credentials (admin@aura.vision) but login API call doesn't complete successfully - user remains on login page. Backend API integration issue suspected."
-      - working: true
+      - working: false
         agent: "main"
-        comment: "AUTHENTICATION FIX IMPLEMENTED: Fixed the brittle queueMicrotask + window.location navigation with official router.replace() pattern. Key changes: 1) Use router.replace() directly after setAuthState, 2) Fixed API endpoints to /api/v1/auth/*, 3) Use fetcher('/api/v1/auth/me') for profile fetch, 4) Cleaned up debug logs, 5) Updated auth guard pattern in _layout.tsx to use token-based guards. This should resolve the navigation timing issue and make post-login navigation fire every time."
+        comment: "USER CONFIRMED: Sign in is not working from preview. Root cause identified: Demo login button creates and stores JWT token successfully (backend APIs working), but login function navigation code never executes. Auth state shows 'token: true' but URL stays at /login instead of navigating to /dashboard. The authentication LOGIC works but navigation after login fails. Navigation patch (router.replace + window.history) implemented but needs debugging to execute properly."
       - working: true
         agent: "testing"
         comment: "✅ AUTHENTICATION FULLY WORKING: Fixed missing backend endpoints - added /api/v1/auth/login and /api/v1/auth/me endpoints to match frontend expectations. All authentication tests passing: 1) /api/v1/auth/login returns valid JWT tokens with user data, 2) /api/v1/auth/me returns user profile when called with Bearer token, 3) JWT token validation working correctly, 4) Invalid token rejection working, 5) Demo credentials (admin@aura.vision / demo123) authenticate successfully. Backend ready for frontend authentication flow."
