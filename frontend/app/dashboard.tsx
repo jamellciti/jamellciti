@@ -191,7 +191,7 @@ export default function Dashboard() {
             <View style={styles.statusItem}>
               <MaterialIcons name="privacy-tip" size={16} color="#00D2FF" />
               <Text style={styles.statusText}>
-                {userInfo?.consent_level?.toUpperCase() || 'NOT SET'}
+                {user?.consent_level?.toUpperCase() || 'NOT SET'}
               </Text>
             </View>
             <View style={styles.statusItem}>
