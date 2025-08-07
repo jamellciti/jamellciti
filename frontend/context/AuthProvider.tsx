@@ -187,7 +187,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         });
 
         if (!res.ok) {
-          await logout();
+          // Clear invalid token and set loading to false BEFORE navigation
+          await clearStoredToken();
+          setAuthState({ user: null, token: null, loading: false, error: null });
           return;
         }
 
@@ -201,7 +203,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         });
 
       } catch (error) {
-        await logout();
+        // Ensure loading state is cleared on any error
+        await clearStoredToken();
+        setAuthState({ user: null, token: null, loading: false, error: null });
       }
     };
 
