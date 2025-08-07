@@ -34,6 +34,8 @@ export default function Login() {
     setIsLoading(true);
 
     try {
+      console.log('Attempting login with:', { email, backend_url: EXPO_PUBLIC_BACKEND_URL });
+      
       const response = await fetch(`${EXPO_PUBLIC_BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -42,7 +44,9 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
 
+      console.log('Login response status:', response.status);
       const data = await response.json();
+      console.log('Login response data:', data);
 
       if (response.ok) {
         // Store auth token and user info
@@ -53,8 +57,10 @@ export default function Login() {
 
         // Check if user needs consent setup
         if (!data.user.consent_level || data.user.consent_level === 'none') {
+          console.log('Redirecting to consent wizard');
           router.replace('/consent-wizard');
         } else {
+          console.log('Redirecting to dashboard');
           router.replace('/dashboard');
         }
       } else {
