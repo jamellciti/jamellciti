@@ -76,7 +76,10 @@ export default function Dashboard() {
         work_orders_open: 8,
         work_orders_closed: 15,
         citations_issued: 23,
-        citations_paid: 18
+        citations_paid: 18,
+        total_fine_value: 45000,
+        grant_potential: 6750,
+        video_reviews_queued: 12
       });
 
       setRecentEvents([
