@@ -167,23 +167,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setAuthState(s => ({ ...s, error: null }));
   };
 
-  // 3️⃣ Check for stored token on app boot
+  // Check for stored token on app boot
   useEffect(() => {
     const bootAuth = async () => {
       try {
-        console.log('🚀 Checking for stored authentication...');
         const token = await getStoredToken();
         
         if (!token) {
-          console.log('❌ No stored token found');
           setAuthState({ user: null, token: null, loading: false, error: null });
           return;
         }
 
-        console.log('🔍 Found stored token, verifying...');
-        
         // Verify token by fetching user profile
-        const res = await fetch(`${API_BASE}/api/kpis`, {
+        const res = await fetch(`${API_BASE}/api/v1/auth/me`, {
           headers: { 
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json' 
@@ -191,22 +187,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         });
 
         if (!res.ok) {
-          console.log('❌ Stored token invalid, clearing...');
           await logout();
           return;
         }
 
-        // If we have a valid token but no user data, we need to get user info
-        // For now, we'll reconstruct basic user info from token or fetch separately
-        const userInfo = {
-          id: 'stored-user',
-          email: 'admin@aura.vision', // In real app, decode from JWT or fetch from API
-          role: 'admin',
-          city: 'phoenix',
-          consent_level: 'civic',
-          subscription_tier: 'aura_free',
-          created_at: new Date().toISOString(),
-        };
+        const userInfo = await res.json();
 
         setAuthState({ 
           user: userInfo, 
@@ -214,11 +199,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           loading: false, 
           error: null 
         });
-        
-        console.log('✅ Authentication restored from stored token');
 
       } catch (error) {
-        console.error('❌ Auth boot error:', error);
         await logout();
       }
     };
