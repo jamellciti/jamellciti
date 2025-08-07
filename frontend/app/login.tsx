@@ -41,20 +41,14 @@ export default function Login() {
   };
 
   const handleDemoLogin = async () => {
-    console.log('🎯 DEMO LOGIN BUTTON CLICKED - Starting demo login process');
-    console.log('🎯 Current auth context login function:', typeof login);
-    
     setEmail('admin@aura.vision');
     setPassword('demo123');
     
     clearError();
     
     try {
-      console.log('🎯 About to call login function from AuthProvider...');
       await login('admin@aura.vision', 'demo123');
-      console.log('🎯 Login function completed successfully');
     } catch (err) {
-      console.error('🎯 Error in demo login handler:', err);
       // Error handling is managed by AuthProvider
     }
   };
