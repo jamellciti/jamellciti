@@ -1,27 +1,12 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
-import { router } from 'expo-router';
+import { View, Pressable, Text, StyleSheet } from 'react-native';
 
 export default function DebugLogin() {
-  const fakeAuth = () => {
-    console.log('🔍 DEBUG: fakeAuth invoked');
-    
-    // 1️⃣ Set fake token
-    localStorage.setItem('token', 'debug-token');
-    console.log('🔍 DEBUG: Token set');
-    
-    // 2️⃣ Replace route
-    router.replace('/dashboard');
-    console.log('🔍 DEBUG: Called router.replace');
-  };
-
   return (
     <View style={styles.container}>
-      <Button 
-        title="DEBUG LOGIN" 
-        onPress={fakeAuth}  // correct prop is onPress
-        accessibilityLabel="debug-login-button"
-      />
+      <Pressable onPress={() => console.log('👆 Pressable works!')}>
+        <Text style={styles.text}>PRESS ME</Text>
+      </Pressable>
     </View>
   );
 }
@@ -31,5 +16,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  text: {
+    fontSize: 18,
+    color: 'blue',
+    padding: 20,
+    backgroundColor: 'lightgray',
+    borderRadius: 5
   }
 });
