@@ -110,14 +110,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // 1️⃣ Complete login function with official Expo Router navigation
   const login = async (email: string, password: string): Promise<void> => {
     try {
-      console.log('🔐 AUTHPROVIDER LOGIN CALLED for:', email);
       setAuthState(s => ({ ...s, loading: true, error: null }));
 
       // Step 1: Authenticate and get token
-      const res = await fetch(`${API_BASE}/api/auth/login`, {
+      const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -129,46 +127,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       const { access_token, user: userData } = await res.json();
-      console.log('✅ Authentication successful for:', userData.email);
 
-      // Step 2: Persist token with expiry
-      await storeToken(access_token, 86400); // 24 hours
+      // Step 2: Persist token
+      await storeToken(access_token, 86400);
       
       // Step 3: Verify token works by fetching user profile
-      const userProfile = await fetch(`${API_BASE}/api/kpis`, {
-        headers: { 
-          'Authorization': `Bearer ${access_token}`,
-          'Content-Type': 'application/json' 
-        },
-      });
-
-      if (!userProfile.ok) {
-        throw new Error('Token verification failed');
-      }
-
-      console.log('✅ Token verified successfully');
+      const me = await fetcher('/api/v1/auth/me');
 
       // Step 4: Commit state BEFORE navigation (critical for guards)
       setAuthState({
-        user: userData,
+        user: me,
         token: access_token,
         loading: false,
         error: null,
       });
 
-      console.log('✅ Auth state committed');
-
-      // Step 5: Navigate with official Expo Router API (works on web & native)
-      const targetPath = (!userData.consent_level || userData.consent_level === 'none') 
+      // Step 5: Navigate with router.replace (synchronous, cross-platform)
+      const targetPath = (!me.consent_level || me.consent_level === 'none') 
         ? '/consent-wizard' 
         : '/dashboard';
       
-      console.log('🔄 Navigating to:', targetPath);
       router.replace(targetPath as any);
-      console.log('✅ Navigation completed');
 
     } catch (err: any) {
-      console.error('❌ AUTHPROVIDER LOGIN ERROR:', err);
       setAuthState(s => ({ 
         ...s, 
         loading: false, 
