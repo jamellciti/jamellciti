@@ -18,6 +18,19 @@ const AppContent = () => {
 
   console.log('🚦 Guard – loading:', loading, 'token:', token);
 
+  // TEMPORARY: Bypass the guard to test if login screen works
+  console.log('🚦 BYPASSING GUARD - Force showing Stack');
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: '#0A0A0A' },
+      }}
+    />
+  );
+
+  // Original guard logic commented out for testing:
+  /*
   // Show loading screen while checking authentication
   if (loading) {
     console.log('🚦 Showing loading screen');
@@ -40,6 +53,7 @@ const AppContent = () => {
       }}
     />
   );
+  */
 };
 
 // Root layout with providers
