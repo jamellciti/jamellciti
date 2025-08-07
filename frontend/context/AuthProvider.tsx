@@ -110,40 +110,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // 1️⃣ Complete login function with full await chain
+  // 1️⃣ Complete login function with official Expo Router navigation
   const login = async (email: string, password: string): Promise<void> => {
     try {
       console.log('🔐 AUTHPROVIDER LOGIN CALLED for:', email);
-      console.log('🔐 API_BASE:', API_BASE);
       setAuthState(s => ({ ...s, loading: true, error: null }));
 
       // Step 1: Authenticate and get token
-      console.log('🔐 About to fetch login API...');
       const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
-      console.log('🔐 Login API response status:', res.status);
-
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({ detail: 'Login failed' }));
-        console.error('🚫 Login API failed:', errorData);
         throw new Error(errorData.detail || `Login failed: ${res.status}`);
       }
 
       const { access_token, user: userData } = await res.json();
       console.log('✅ Authentication successful for:', userData.email);
-      console.log('✅ Token preview:', access_token.slice(0, 12) + '...');
 
       // Step 2: Persist token with expiry
-      console.log('💾 About to store token...');
       await storeToken(access_token, 86400); // 24 hours
       
       // Step 3: Verify token works by fetching user profile
-      console.log('🔍 Verifying token by fetching KPI endpoint...');
-      
       const userProfile = await fetch(`${API_BASE}/api/kpis`, {
         headers: { 
           'Authorization': `Bearer ${access_token}`,
@@ -151,17 +142,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         },
       });
 
-      console.log('🔍 KPI verification response:', userProfile.status);
-
       if (!userProfile.ok) {
-        console.error('🚫 Token verification failed:', userProfile.status);
         throw new Error('Token verification failed');
       }
 
       console.log('✅ Token verified successfully');
 
-      // Step 4: Update auth context
-      console.log('🎯 Updating auth state...');
+      // Step 4: Commit state BEFORE navigation (critical for guards)
       setAuthState({
         user: userData,
         token: access_token,
@@ -169,34 +156,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         error: null,
       });
 
-      console.log('🎯 Login complete - navigating based on consent level:', userData.consent_level);
+      console.log('✅ Auth state committed');
 
-      // Step 5: Navigate based on user state  
-      // Use window.location for web (Expo Router navigation issue)
-      queueMicrotask(() => {
-        console.log('🔄 queueMicrotask: About to navigate...');
-        
-        const targetPath = (!userData.consent_level || userData.consent_level === 'none') 
-          ? '/consent-wizard' 
-          : '/dashboard';
-        
-        console.log('🔄 queueMicrotask: Target path:', targetPath);
-        
-        // For web, use window.location as Expo Router isn't working  
-        if (typeof window !== 'undefined') {
-          console.log('🌐 Using window.location for web navigation');
-          window.location.href = targetPath;
-        } else {
-          console.log('📱 Using expo router for native navigation');
-          router.replace(targetPath as any);
-        }
-        
-        console.log('🔄 queueMicrotask: Navigation call completed');
-      });
+      // Step 5: Navigate with official Expo Router API (works on web & native)
+      const targetPath = (!userData.consent_level || userData.consent_level === 'none') 
+        ? '/consent-wizard' 
+        : '/dashboard';
+      
+      console.log('🔄 Navigating to:', targetPath);
+      router.replace(targetPath as any);
+      console.log('✅ Navigation completed');
 
     } catch (err: any) {
       console.error('❌ AUTHPROVIDER LOGIN ERROR:', err);
-      console.error('❌ Error stack:', err.stack);
       setAuthState(s => ({ 
         ...s, 
         loading: false, 
