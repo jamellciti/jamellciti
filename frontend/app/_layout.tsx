@@ -32,16 +32,7 @@ const AppContent = () => {
         headerShown: false,
         contentStyle: { backgroundColor: '#0A0A0A' },
       }}
-    >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="login" />
-      <Stack.Screen name="register" />
-      <Stack.Screen name="consent-wizard" />
-      <Stack.Screen name="dashboard" />
-      <Stack.Screen name="settings" />
-      <Stack.Screen name="trust" />
-      <Stack.Screen name="dev-tiles" />
-    </Stack>
+    />
   );
 };
 
