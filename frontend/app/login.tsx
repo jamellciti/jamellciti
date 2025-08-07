@@ -17,8 +17,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { authFetcher, endpoints } from '../services/api';
 import storage from '../utils/storage';
 
-const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL || 'https://0cf8f361-2398-415b-b274-ff11de2ad810.preview.emergentagent.com';
-
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
