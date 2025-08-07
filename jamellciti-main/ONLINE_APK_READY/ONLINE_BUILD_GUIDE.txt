@@ -1,0 +1,46 @@
+🚀 AURA VISION - ONLINE APK BUILDER GUIDE
+=========================================
+
+📱 App Details:
+- Name: Aura Vision - Smart City Operations
+- Package: com.auravision.app
+- Version: 1.0.0
+- Target: Android 5.0+
+
+🌐 RECOMMENDED ONLINE BUILDERS:
+
+1. **ApkOnline.com** (Most Reliable)
+   - Upload: android/ folder as ZIP
+   - Build time: ~10-15 minutes
+   - Free tier available
+
+2. **BuildApk.online** 
+   - Drag & drop android/ folder
+   - Fast processing
+   - Good success rate
+
+3. **AppGeyser.com**
+   - Enterprise-grade
+   - May require account
+
+📋 STEP-BY-STEP PROCESS:
+
+1. ZIP the android/ folder
+2. Go to chosen online builder
+3. Upload ZIP file
+4. Configure:
+   - App Name: Aura Vision
+   - Package: com.auravision.app
+   - Target SDK: 33
+   - Min SDK: 21
+5. Start build process
+6. Download APK when ready
+
+🔐 Login Credentials:
+- Email: admin@aura.vision  
+- Password: demo123
+
+✅ Expected APK:
+- Size: ~15-25MB
+- Ready to install on Android 5.0+
+- All smart city features included

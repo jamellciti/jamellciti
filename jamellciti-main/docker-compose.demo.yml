@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: aura-mongo-demo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=aura_vision
+    volumes:
+      - aura_mongo_data:/data/db
+    networks:
+      - aura-network
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: aura-backend-demo
+    ports:
+      - "8001:8001"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017
+      - DB_NAME=aura_vision
+      - JWT_SECRET=aura-vision-demo-secret-2025
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+    networks:
+      - aura-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: aura-frontend-demo
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8001
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - aura-network
+    restart: unless-stopped
+
+volumes:
+  aura_mongo_data:
+
+networks:
+  aura-network:
+    driver: bridge
+
+# Demo-specific configuration
+# To start the demo environment:
+# 1. docker-compose -f docker-compose.demo.yml up -d
+# 2. Wait 30 seconds for services to initialize
+# 3. Run: docker exec aura-backend-demo python /app/scripts/reset_demo.py
+# 4. Open http://localhost:3000
+# 5. Login: admin@aura.vision / demo123

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="theme-color" content="#4F46E5">
+    <title>Aura Vision - Smart City Operations</title>
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        body { 
+            margin: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; 
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 20px; }
+        .features { max-width: 400px; text-align: left; }
+        .feature { margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .login-btn { 
+            background: rgba(255,255,255,0.2); 
+            border: 2px solid white; 
+            color: white; 
+            padding: 15px 30px; 
+            border-radius: 25px; 
+            font-size: 16px; 
+            margin-top: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌟 Aura Vision</h1>
+    <p style="font-size: 1.2em; margin-bottom: 30px;">Smart City IoT Traffic Monitoring</p>
+    
+    <div class="features">
+        <div class="feature">📡 Real-time Event Detection</div>
+        <div class="feature">🗺️ Live Traffic Map</div>
+        <div class="feature">📊 KPI Dashboard</div>
+        <div class="feature">🚧 Work Order Management</div>
+        <div class="feature">📋 Citation Tracking</div>
+        <div class="feature">🎥 Video Review System</div>
+    </div>
+    
+    <button class="login-btn" onclick="alert('Connect to WiFi to access full dashboard features!')">
+        Launch Dashboard
+    </button>
+    
+    <script>
+        console.log('Aura Vision Mobile App Loaded');
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    </script>
+</body>
+</html>
