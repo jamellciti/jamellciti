@@ -23,7 +23,17 @@ export default function Login() {
   const router = useRouter();
   
   // 3️⃣ Use Auth context
-  const { login, loading, error, clearError } = useAuth();
+  const { login, loading, error, clearError, user } = useAuth();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (user && !loading) {
+      const targetPath = (!user.consent_level || user.consent_level === 'none') 
+        ? '/consent-wizard' 
+        : '/dashboard';
+      router.replace(targetPath);
+    }
+  }, [user, loading]);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -31,12 +41,11 @@ export default function Login() {
       return;
     }
 
-    clearError();
-    
     try {
       await login(email, password);
+      // Navigation is handled by the login function
     } catch (err) {
-      // Error handling is managed by AuthProvider
+      // Error handling is managed by useAuth hook
     }
   };
 
@@ -44,12 +53,11 @@ export default function Login() {
     setEmail('admin@aura.vision');
     setPassword('demo123');
     
-    clearError();
-    
     try {
       await login('admin@aura.vision', 'demo123');
+      // Navigation is handled by the login function
     } catch (err) {
-      // Error handling is managed by AuthProvider
+      // Error handling is managed by useAuth hook
     }
   };
 
