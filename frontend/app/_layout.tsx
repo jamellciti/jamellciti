@@ -46,6 +46,12 @@ function InnerLayout() {
         contentStyle: { backgroundColor: '#0A0A0A' },
       }}
     >
+      {/* Debug screen for testing router.replace */}
+      <Stack.Screen 
+        name="debugLogin" 
+        options={{ headerShown: false }} 
+      />
+      
       {/* Public screens - always available */}
       <Stack.Screen 
         name="login" 
