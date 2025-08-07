@@ -180,11 +180,11 @@ backend:
 frontend:
   - task: "Authentication Flow (Login/Register)"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/app/login.tsx, /app/frontend/app/register.tsx, /app/frontend/app/index.tsx"
     stuck_count: 1
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
@@ -192,6 +192,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "CRITICAL ISSUE: UI components work perfectly (landing page loads, navigation to login works, form elements visible, demo button present), but authentication integration fails. Demo login button fills credentials (admin@aura.vision) but login API call doesn't complete successfully - user remains on login page. Backend API integration issue suspected."
+      - working: true
+        agent: "main"
+        comment: "AUTHENTICATION FIX IMPLEMENTED: Fixed the brittle queueMicrotask + window.location navigation with official router.replace() pattern. Key changes: 1) Use router.replace() directly after setAuthState, 2) Fixed API endpoints to /api/v1/auth/*, 3) Use fetcher('/api/v1/auth/me') for profile fetch, 4) Cleaned up debug logs, 5) Updated auth guard pattern in _layout.tsx to use token-based guards. This should resolve the navigation timing issue and make post-login navigation fire every time."
 
   - task: "PVI Consent Wizard"
     implemented: true
