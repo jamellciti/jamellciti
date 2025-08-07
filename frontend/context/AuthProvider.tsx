@@ -104,9 +104,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const login = async (email: string, password: string): Promise<void> => {
+    console.log('🔐 LOGIN FUNCTION CALLED with:', email);
     try {
+      console.log('🔐 LOGIN: Setting loading state...');
       setAuthState(s => ({ ...s, loading: true, error: null }));
 
+      console.log('🔐 LOGIN: Making API call to', `${API_BASE}/api/v1/auth/login`);
       // Step 1: Authenticate and get token
       const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
         method: 'POST',
@@ -115,14 +118,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
 
       if (!res.ok) {
+        console.log('🔐 LOGIN ERROR: API call failed with status:', res.status);
         const errorData = await res.json().catch(() => ({ detail: 'Login failed' }));
         throw new Error(errorData.detail || `Login failed: ${res.status}`);
       }
 
+      console.log('🔐 LOGIN: API call successful, parsing response...');
       const { access_token, user: userData } = await res.json();
+      console.log('🔐 LOGIN: Got token and user data, storing token...');
 
       // Step 2: Persist token
       await storeToken(access_token, 86400);
+      console.log('🔐 LOGIN: Token stored, verifying with /auth/me...');
       
       // Step 3: Verify token works by fetching user profile
       const meRes = await fetch(`${API_BASE}/api/v1/auth/me`, {
@@ -134,9 +141,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       let userProfile = userData;
       if (meRes.ok) {
+        console.log('🔐 LOGIN: Profile verification successful');
         userProfile = await meRes.json();
+      } else {
+        console.log('🔐 LOGIN: Profile verification failed, using original user data');
       }
 
+      console.log('🔐 LOGIN: Setting auth state with user data...');
       // Step 4: Commit state BEFORE navigation (critical for guards)
       setAuthState({
         user: userProfile,
@@ -167,6 +178,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
     } catch (err: any) {
+      console.log('🔐 LOGIN ERROR in catch block:', err);
       setAuthState(s => ({ 
         ...s, 
         loading: false, 
