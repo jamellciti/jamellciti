@@ -12,7 +12,7 @@ from typing import Dict, Any, Optional
 import uuid
 
 # Configuration
-BASE_URL = "https://0cf8f361-2398-415b-b274-ff11de2ad810.preview.emergentagent.com/api"
+BASE_URL = "https://73613a20-b586-452b-8c47-65419969d01e.preview.emergentagent.com/api"
 DEMO_USER_EMAIL = "admin@aura.vision"
 DEMO_USER_PASSWORD = "demo123"
 

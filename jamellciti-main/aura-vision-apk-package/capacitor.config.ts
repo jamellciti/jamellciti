@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
   webDir: 'build',
   server: {
     // Production backend URL for mobile app
-    url: 'https://64fd6267-0033-41b0-9cf5-16f4e283c680.preview.emergentagent.com',
+    url: 'https://73613a20-b586-452b-8c47-65419969d01e.preview.emergentagent.com',
     cleartext: true
   },
   plugins: {

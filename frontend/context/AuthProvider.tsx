@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 import { useRouter } from 'expo-router';
 import { fetcher } from '../services/api';
 
-const API_BASE = process.env.EXPO_PUBLIC_BACKEND_URL || 'https://0cf8f361-2398-415b-b274-ff11de2ad810.preview.emergentagent.com';
+const API_BASE = process.env.EXPO_PUBLIC_BACKEND_URL || 'https://73613a20-b586-452b-8c47-65419969d01e.preview.emergentagent.com';
 
 interface User {
   id: string;

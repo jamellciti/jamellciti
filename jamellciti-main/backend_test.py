@@ -14,7 +14,7 @@ from typing import Dict, List, Optional
 import uuid
 
 # Configuration
-BACKEND_URL = "https://64fd6267-0033-41b0-9cf5-16f4e283c680.preview.emergentagent.com"
+BACKEND_URL = "https://73613a20-b586-452b-8c47-65419969d01e.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 WS_URL = f"wss://64fd6267-0033-41b0-9cf5-16f4e283c680.preview.emergentagent.com/ws/live"
 
