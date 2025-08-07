@@ -53,8 +53,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Add ref to track bootAuth execution
   const bootAuthExecuted = useRef(false);
   
-  console.log('🛡️ AuthProvider render – authState:', authState);
-  
   const router = useRouter();
 
   // Token storage utilities
