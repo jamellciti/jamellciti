@@ -150,13 +150,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         ? '/consent-wizard' 
         : '/dashboard';
       
+      console.log('🚀 NAVIGATION: About to navigate to:', targetPath);
+      console.log('🚀 NAVIGATION: User consent level:', userProfile.consent_level);
+      
       router.replace(targetPath as any);
+      console.log('🚀 NAVIGATION: router.replace() called');
 
       // Final 5%: Force URL sync for web to ensure browser location updates immediately
       if (Platform.OS === 'web') {
+        console.log('🚀 NAVIGATION: Web - forcing URL sync with window.history');
         // Ensure React state and browser history are in sync
         setTimeout(() => {
           window.history.replaceState(null, '', targetPath);
+          console.log('🚀 NAVIGATION: window.history.replaceState() executed');
         }, 0);
       }
 
