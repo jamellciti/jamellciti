@@ -43,16 +43,27 @@ export default function Login() {
   };
 
   const handleDemoLogin = async () => {
-    console.log('🎯 Demo login triggered');
+    console.log('🎯 DEMO LOGIN BTN CLICKED - STEP 1 CHECK');
+    console.log('🎯 Email state:', email);
+    console.log('🎯 Login function reference:', login);
+    console.log('🎯 Loading state:', loading);
+    console.log('🎯 Error state:', error);
+    
     setEmail('admin@aura.vision');
     setPassword('demo123');
     
     clearError();
     
     try {
-      await login('admin@aura.vision', 'demo123');
+      console.log('🎯 About to call login function...');
+      await login('admin@aura.vision', 'demo123').catch(err => {
+        console.error('🚫 LOGIN PROMISE REJECTION:', err);
+        throw err;
+      });
+      console.log('✅ Login function completed successfully');
       // Navigation is handled by the login function
     } catch (err) {
+      console.error('❌ LOGIN CATCH BLOCK:', err);
       console.log('Demo login handled by AuthProvider');
     }
   };
