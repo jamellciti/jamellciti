@@ -62,9 +62,11 @@ export default function Index() {
   };
 
   const handleLogout = async () => {
-    await AsyncStorage.multiRemove(['auth_token', 'user_info']);
+    console.log('🚪 Logging out...');
+    await storage.clear();
     setIsAuthenticated(false);
     setUserInfo(null);
+    console.log('✅ Logout complete');
   };
 
   if (isLoading) {
