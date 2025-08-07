@@ -1,0 +1,116 @@
+{
+  "summary": {
+    "passed": 1,
+    "total": 11,
+    "success_rate": 9.1,
+    "timestamp": "2025-08-07T14:29:47.830488"
+  },
+  "detailed_results": [
+    {
+      "test": "API Health Check",
+      "success": true,
+      "details": "API Status: active",
+      "timestamp": "2025-08-07T14:29:42.288804",
+      "data": {
+        "message": "Aura Vision API",
+        "status": "active",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "test": "User Registration",
+      "success": false,
+      "details": "Registration failed: {'detail': [{'type': 'missing', 'loc': ['query', 'email'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}, {'type': 'missing', 'loc': ['query', 'password'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]}",
+      "timestamp": "2025-08-07T14:29:42.808518",
+      "data": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "query",
+              "email"
+            ],
+            "msg": "Field required",
+            "input": null,
+            "url": "https://errors.pydantic.dev/2.5/v/missing"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "query",
+              "password"
+            ],
+            "msg": "Field required",
+            "input": null,
+            "url": "https://errors.pydantic.dev/2.5/v/missing"
+          }
+        ]
+      }
+    },
+    {
+      "test": "User Authentication",
+      "success": false,
+      "details": "Login failed: {'detail': 'Invalid credentials'}",
+      "timestamp": "2025-08-07T14:29:43.328978",
+      "data": {
+        "detail": "Invalid credentials"
+      }
+    },
+    {
+      "test": "Consent Workflow",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:43.829136",
+      "data": null
+    },
+    {
+      "test": "Subscription Status",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:44.329278",
+      "data": null
+    },
+    {
+      "test": "Event Ingestion",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:44.829411",
+      "data": null
+    },
+    {
+      "test": "KPIs Dashboard",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:45.329544",
+      "data": null
+    },
+    {
+      "test": "Work Orders",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:45.829676",
+      "data": null
+    },
+    {
+      "test": "Citations",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:46.329809",
+      "data": null
+    },
+    {
+      "test": "Video Reviews",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:46.829944",
+      "data": null
+    },
+    {
+      "test": "Event Clusters",
+      "success": false,
+      "details": "No auth token available",
+      "timestamp": "2025-08-07T14:29:47.330089",
+      "data": null
+    }
+  ]
+}
