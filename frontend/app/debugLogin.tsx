@@ -1,14 +1,31 @@
 import React from 'react';
-import { View, Pressable, Text, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet } from 'react-native';
+import { router } from 'expo-router';
 
 console.log('🔥 debugLogin.tsx loaded at', new Date().toISOString());
 
 export default function DebugLogin() {
+  const fakeAuth = () => {
+    console.log('🔍 DEBUG: fakeAuth invoked');
+    
+    // 1️⃣ Set fake token (using same format as our auth system)
+    localStorage.setItem('token', 'debug-jwt-token');
+    localStorage.setItem('token_exp', String(Date.now() + 86400 * 1000)); // 24 hours
+    console.log('🔍 DEBUG: Token set in localStorage');
+    
+    // 2️⃣ Replace route to dashboard
+    console.log('🔍 DEBUG: About to call router.replace(/dashboard)');
+    router.replace('/dashboard');
+    console.log('🔍 DEBUG: router.replace() called successfully');
+  };
+
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => console.log('👆 Pressable works!')}>
-        <Text style={styles.text}>PRESS ME</Text>
-      </Pressable>
+      <Button 
+        title="DEBUG LOGIN - TEST ROUTER.REPLACE" 
+        onPress={fakeAuth}
+        accessibilityLabel="debug-login-button"
+      />
     </View>
   );
 }
@@ -18,12 +35,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  text: {
-    fontSize: 18,
-    color: 'blue',
-    padding: 20,
-    backgroundColor: 'lightgray',
-    borderRadius: 5
   }
 });
