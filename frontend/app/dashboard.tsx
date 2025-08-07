@@ -326,10 +326,10 @@ export default function Dashboard() {
 
             <TouchableOpacity
               style={styles.actionCard}
-              onPress={() => router.push('/citations')}
+              onPress={() => router.push('/trust')}
             >
-              <MaterialIcons name="receipt" size={24} color="#FFA726" />
-              <Text style={styles.actionText}>Citations</Text>
+              <MaterialIcons name="security" size={24} color="#4CAF50" />
+              <Text style={styles.actionText}>Trust Dashboard</Text>
             </TouchableOpacity>
           </View>
         </View>
