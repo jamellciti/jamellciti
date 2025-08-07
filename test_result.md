@@ -257,3 +257,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Backend testing completed successfully - all APIs working perfectly with demo data created. Frontend mobile app implemented with core features: auth flow, consent wizard, dashboard, settings. Ready for comprehensive frontend testing. Demo user created: admin@aura.vision / demo123 with CIVIC consent level and sample events/KPIs."
+  - agent: "main"
+    message: "User requested comprehensive frontend testing before adding new features. Focus on: 1) End-to-End flows (login→consent→dashboard), 2) Device compatibility, 3) Security/privacy checks, 4) Usability polish. Test with demo credentials admin@aura.vision/demo123. Mobile dimensions: iPhone 12 (390x844) or Samsung Galaxy S21 (360x800)."
