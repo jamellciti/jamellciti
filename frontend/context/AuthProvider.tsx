@@ -52,6 +52,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   
   // Add flag to prevent bootAuth loops during navigation
   const [isNavigating, setIsNavigating] = useState(false);
+  // Add ref to track bootAuth execution
+  const bootAuthExecuted = useRef(false);
   
   console.log('🛡️ AuthProvider render – authState:', authState);
   
