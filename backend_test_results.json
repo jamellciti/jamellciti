@@ -3,16 +3,16 @@
     "passed": 10,
     "total": 11,
     "success_rate": 90.9,
-    "auth_tests_passed": 4,
+    "auth_tests_passed": 5,
     "auth_tests_total": 5,
-    "timestamp": "2025-08-07T16:44:34.610908"
+    "timestamp": "2025-08-07T16:45:32.989168"
   },
   "detailed_results": [
     {
       "test": "API Health Check",
       "success": true,
       "details": "API Status: active",
-      "timestamp": "2025-08-07T16:44:25.834548",
+      "timestamp": "2025-08-07T16:45:24.278352",
       "data": {
         "message": "Aura Vision API",
         "status": "active",
@@ -23,7 +23,7 @@
       "test": "User Registration",
       "success": true,
       "details": "Demo user admin@aura.vision already exists (expected)",
-      "timestamp": "2025-08-07T16:44:26.363061",
+      "timestamp": "2025-08-07T16:45:24.821980",
       "data": {
         "detail": "User already exists"
       }
@@ -32,7 +32,7 @@
       "test": "User Authentication",
       "success": true,
       "details": "Successfully authenticated admin@aura.vision",
-      "timestamp": "2025-08-07T16:44:26.928051",
+      "timestamp": "2025-08-07T16:45:25.384201",
       "data": {
         "user_id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9",
         "role": "admin"
@@ -40,27 +40,43 @@
     },
     {
       "test": "V1 Auth Login (/api/v1/auth/login)",
-      "success": false,
-      "details": "V1 login endpoint not found: {'detail': 'Not Found'}",
-      "timestamp": "2025-08-07T16:44:27.455507",
+      "success": true,
+      "details": "V1 login endpoint works: {'access_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTY0NzRmMzUtY2E3ZC00MzM1LWI2YzItN2VhYmY2MTFjM2M5IiwiZW1haWwiOiJhZG1pbkBhdXJhLnZpc2lvbiIsInJvbGUiOiJhZG1pbiIsImNpdHkiOiJwaG9lbml4IiwiY29uc2VudF9sZXZlbCI6ImNpdmljIiwic3Vic2NyaXB0aW9uX3RpZXIiOiJhdXJhX2ZyZWUiLCJleHAiOjE3NTQ2NzE1MjV9.uksy8IP8eeWo0AZk513UEBoy7KhrtEjrey-w145fVpo', 'token_type': 'bearer', 'user': {'id': '56474f35-ca7d-4335-b6c2-7eabf611c3c9', 'email': 'admin@aura.vision', 'role': 'admin', 'city': 'phoenix', 'consent_level': 'civic', 'subscription_tier': 'aura_free', 'created_at': '2025-08-07T14:30:05.546000'}}",
+      "timestamp": "2025-08-07T16:45:25.945960",
       "data": {
-        "detail": "Not Found"
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTY0NzRmMzUtY2E3ZC00MzM1LWI2YzItN2VhYmY2MTFjM2M5IiwiZW1haWwiOiJhZG1pbkBhdXJhLnZpc2lvbiIsInJvbGUiOiJhZG1pbiIsImNpdHkiOiJwaG9lbml4IiwiY29uc2VudF9sZXZlbCI6ImNpdmljIiwic3Vic2NyaXB0aW9uX3RpZXIiOiJhdXJhX2ZyZWUiLCJleHAiOjE3NTQ2NzE1MjV9.uksy8IP8eeWo0AZk513UEBoy7KhrtEjrey-w145fVpo",
+        "token_type": "bearer",
+        "user": {
+          "id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9",
+          "email": "admin@aura.vision",
+          "role": "admin",
+          "city": "phoenix",
+          "consent_level": "civic",
+          "subscription_tier": "aura_free",
+          "created_at": "2025-08-07T14:30:05.546000"
+        }
       }
     },
     {
       "test": "V1 Auth Me (/api/v1/auth/me)",
-      "success": false,
-      "details": "V1 auth/me endpoint not found: {'detail': 'Not Found'}",
-      "timestamp": "2025-08-07T16:44:27.483441",
+      "success": true,
+      "details": "V1 auth/me endpoint works: {'id': '56474f35-ca7d-4335-b6c2-7eabf611c3c9', 'email': 'admin@aura.vision', 'role': 'admin', 'city': 'phoenix', 'consent_level': 'civic', 'subscription_tier': 'aura_free', 'created_at': '2025-08-07T14:30:05.546000'}",
+      "timestamp": "2025-08-07T16:45:26.006036",
       "data": {
-        "detail": "Not Found"
+        "id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9",
+        "email": "admin@aura.vision",
+        "role": "admin",
+        "city": "phoenix",
+        "consent_level": "civic",
+        "subscription_tier": "aura_free",
+        "created_at": "2025-08-07T14:30:05.546000"
       }
     },
     {
       "test": "JWT Token Validation",
       "success": true,
       "details": "Token valid for protected endpoints",
-      "timestamp": "2025-08-07T16:44:28.028089",
+      "timestamp": "2025-08-07T16:45:26.530761",
       "data": {
         "token_works": true
       }
@@ -69,7 +85,7 @@
       "test": "Invalid Token Rejection",
       "success": true,
       "details": "Invalid token properly rejected",
-      "timestamp": "2025-08-07T16:44:28.045714",
+      "timestamp": "2025-08-07T16:45:26.545720",
       "data": {
         "detail": "Invalid token"
       }
@@ -78,7 +94,7 @@
       "test": "API Health Check",
       "success": true,
       "details": "API Status: active",
-      "timestamp": "2025-08-07T16:44:28.573470",
+      "timestamp": "2025-08-07T16:45:27.060655",
       "data": {
         "message": "Aura Vision API",
         "status": "active",
@@ -89,7 +105,7 @@
       "test": "User Registration",
       "success": true,
       "details": "Demo user admin@aura.vision already exists (expected)",
-      "timestamp": "2025-08-07T16:44:29.098013",
+      "timestamp": "2025-08-07T16:45:27.583266",
       "data": {
         "detail": "User already exists"
       }
@@ -98,7 +114,7 @@
       "test": "User Authentication",
       "success": true,
       "details": "Successfully authenticated admin@aura.vision",
-      "timestamp": "2025-08-07T16:44:29.662621",
+      "timestamp": "2025-08-07T16:45:28.149394",
       "data": {
         "user_id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9",
         "role": "admin"
@@ -108,29 +124,29 @@
       "test": "Get Consent Status",
       "success": true,
       "details": "Current consent level: civic",
-      "timestamp": "2025-08-07T16:44:30.183131",
+      "timestamp": "2025-08-07T16:45:28.673000",
       "data": {
         "level": "civic",
-        "updated_at": "2025-08-07T14:31:29.082000",
+        "updated_at": "2025-08-07T16:45:18.341000",
         "clip_ids_hash": []
       }
     },
     {
       "test": "Update Consent Level",
       "success": true,
-      "details": "Updated consent to CIVIC (CoC: c7ddf1c304d1...)",
-      "timestamp": "2025-08-07T16:44:30.215293",
+      "details": "Updated consent to CIVIC (CoC: 8fdd13dae8db...)",
+      "timestamp": "2025-08-07T16:45:28.693591",
       "data": {
         "message": "Consent level updated successfully",
         "level": "civic",
-        "chain_of_custody": "c7ddf1c304d11527475ed8d736a558c61d7f768751326f15e09765e5be3a2093"
+        "chain_of_custody": "8fdd13dae8db9f241ab5bc3045ddd63b01ee7c5c87c448955951521b95da3a26"
       }
     },
     {
       "test": "Subscription Status",
       "success": true,
       "details": "Subscription tier: aura_free, Active: True",
-      "timestamp": "2025-08-07T16:44:30.781905",
+      "timestamp": "2025-08-07T16:45:29.215544",
       "data": {
         "tier": "aura_free",
         "active": true,
@@ -141,33 +157,33 @@
     {
       "test": "Create API Key",
       "success": true,
-      "details": "Created API key: aura_7f74f0f...",
-      "timestamp": "2025-08-07T16:44:31.329859",
+      "details": "Created API key: aura_35c48ff...",
+      "timestamp": "2025-08-07T16:45:29.755100",
       "data": {
-        "api_key": "aura_7f74f0f1b5d7",
+        "api_key": "aura_35c48ff62b99",
         "name": "test-device-key",
         "city": "phoenix",
-        "created_at": "2025-08-07T16:44:31.319062"
+        "created_at": "2025-08-07T16:45:29.751331"
       }
     },
     {
       "test": "Ingest pothole Event",
       "success": true,
-      "details": "Event be7a58d4... \u2192 1 WO, 0 citations, 0 videos",
-      "timestamp": "2025-08-07T16:44:31.372490",
+      "details": "Event 74a6cab1... \u2192 1 WO, 0 citations, 0 videos",
+      "timestamp": "2025-08-07T16:45:29.774511",
       "data": {
-        "event_id": "be7a58d4-e441-4580-8a32-f7d2431eac1c",
+        "event_id": "74a6cab1-5424-47fb-a272-2fc46ab6d097",
         "status": "processed",
         "actions": {
           "work_orders": [
             {
-              "id": "ed5d93f6-a99e-42f6-8999-729ec00d7ce0",
-              "event_id": "be7a58d4-e441-4580-8a32-f7d2431eac1c",
+              "id": "c0c38d22-3267-403a-b90c-6a29a3f2bde8",
+              "event_id": "74a6cab1-5424-47fb-a272-2fc46ab6d097",
               "type": "pothole",
               "description": "Pothole detected at 33.4484, -112.0740 (severity: 4)",
               "status": "open",
-              "created_at": "2025-08-07T16:44:31.352874",
-              "updated_at": "2025-08-07T16:44:31.352876",
+              "created_at": "2025-08-07T16:45:29.771224",
+              "updated_at": "2025-08-07T16:45:29.771226",
               "estimated_sla_hours": 48
             }
           ],
@@ -180,22 +196,22 @@
     {
       "test": "Ingest litter_dumping Event",
       "success": true,
-      "details": "Event 06483b23... \u2192 0 WO, 1 citations, 0 videos",
-      "timestamp": "2025-08-07T16:44:31.434053",
+      "details": "Event 2480151d... \u2192 0 WO, 1 citations, 0 videos",
+      "timestamp": "2025-08-07T16:45:29.792347",
       "data": {
-        "event_id": "06483b23-8405-430c-aa4e-75367388de62",
+        "event_id": "2480151d-e462-41c6-b5f9-c642f5ce60d2",
         "status": "processed",
         "actions": {
           "work_orders": [],
           "citations": [
             {
-              "id": "1b4dfa3b-eddc-4f2b-b972-fab2a387fe99",
-              "event_id": "06483b23-8405-430c-aa4e-75367388de62",
+              "id": "881436ad-64d1-4396-afe8-b59e8b3d656f",
+              "event_id": "2480151d-e462-41c6-b5f9-c642f5ce60d2",
               "type": "litter_dumping",
               "description": "Litter Dumping violation at 33.4485, -112.0741",
               "fine_amount": 200.0,
               "status": "issued",
-              "created_at": "2025-08-07T16:44:31.386795"
+              "created_at": "2025-08-07T16:45:29.788721"
             }
           ],
           "video_reviews": [],
@@ -206,35 +222,35 @@
     {
       "test": "Ingest illegal_uturn Event",
       "success": true,
-      "details": "Event 528e1d72... \u2192 0 WO, 1 citations, 1 videos",
-      "timestamp": "2025-08-07T16:44:31.457184",
+      "details": "Event 41288465... \u2192 0 WO, 1 citations, 1 videos",
+      "timestamp": "2025-08-07T16:45:29.833696",
       "data": {
-        "event_id": "528e1d72-216a-494e-bd55-f84e768b64fb",
+        "event_id": "41288465-6250-492d-81d7-52873b5c28be",
         "status": "processed",
         "actions": {
           "work_orders": [],
           "citations": [
             {
-              "id": "ad810066-1559-41ec-a4a0-df5c99526446",
-              "event_id": "528e1d72-216a-494e-bd55-f84e768b64fb",
+              "id": "1245a492-b303-42eb-836c-be29c0b62a19",
+              "event_id": "41288465-6250-492d-81d7-52873b5c28be",
               "type": "illegal_uturn",
               "description": "Illegal Uturn violation at 33.4486, -112.0742",
               "fine_amount": 150.0,
               "status": "issued",
-              "created_at": "2025-08-07T16:44:31.449544"
+              "created_at": "2025-08-07T16:45:29.828109"
             }
           ],
           "video_reviews": [
             {
-              "id": "c2137275-f88e-45f3-90a4-bfa89ca1ae8f",
-              "event_id": "528e1d72-216a-494e-bd55-f84e768b64fb",
-              "video_url": "https://aura-storage.s3.amazonaws.com/videos/528e1d72-216a-494e-bd55-f84e768b64fb_clip.mp4",
-              "thumbnail_url": "https://aura-storage.s3.amazonaws.com/thumbnails/528e1d72-216a-494e-bd55-f84e768b64fb_thumb.jpg",
+              "id": "8aa9207d-e020-4278-8809-b607ccc48880",
+              "event_id": "41288465-6250-492d-81d7-52873b5c28be",
+              "video_url": "https://aura-storage.s3.amazonaws.com/videos/41288465-6250-492d-81d7-52873b5c28be_clip.mp4",
+              "thumbnail_url": "https://aura-storage.s3.amazonaws.com/thumbnails/41288465-6250-492d-81d7-52873b5c28be_thumb.jpg",
               "review_status": "queued",
               "destination_agency": "pd",
               "confidence_score": 0.78,
               "reviewer_comments": "",
-              "created_at": "2025-08-07T16:44:31.450301",
+              "created_at": "2025-08-07T16:45:29.828974",
               "reviewed_at": null
             }
           ],
@@ -245,35 +261,35 @@
     {
       "test": "Ingest speeding_school_zone Event",
       "success": true,
-      "details": "Event 4c7864d4... \u2192 0 WO, 1 citations, 1 videos",
-      "timestamp": "2025-08-07T16:44:31.476930",
+      "details": "Event 152aa2fa... \u2192 0 WO, 1 citations, 1 videos",
+      "timestamp": "2025-08-07T16:45:29.853850",
       "data": {
-        "event_id": "4c7864d4-8107-4f54-8d3f-b37031c949b7",
+        "event_id": "152aa2fa-c942-4a3f-97cb-3d8f0bbbd3ad",
         "status": "processed",
         "actions": {
           "work_orders": [],
           "citations": [
             {
-              "id": "08a78945-b87d-4dce-adb6-f3dce88a7c63",
-              "event_id": "4c7864d4-8107-4f54-8d3f-b37031c949b7",
+              "id": "ce3e2471-6137-468a-96bd-06c822b6d0dd",
+              "event_id": "152aa2fa-c942-4a3f-97cb-3d8f0bbbd3ad",
               "type": "speeding_school_zone",
               "description": "Speeding School Zone violation at 33.4487, -112.0743",
               "fine_amount": 250.0,
               "status": "issued",
-              "created_at": "2025-08-07T16:44:31.472966"
+              "created_at": "2025-08-07T16:45:29.849728"
             }
           ],
           "video_reviews": [
             {
-              "id": "04776a32-63d2-412a-9367-9b04cea09871",
-              "event_id": "4c7864d4-8107-4f54-8d3f-b37031c949b7",
-              "video_url": "https://aura-storage.s3.amazonaws.com/videos/4c7864d4-8107-4f54-8d3f-b37031c949b7_clip.mp4",
-              "thumbnail_url": "https://aura-storage.s3.amazonaws.com/thumbnails/4c7864d4-8107-4f54-8d3f-b37031c949b7_thumb.jpg",
+              "id": "fc74279f-ba70-4f5b-8f37-6e7572e827a5",
+              "event_id": "152aa2fa-c942-4a3f-97cb-3d8f0bbbd3ad",
+              "video_url": "https://aura-storage.s3.amazonaws.com/videos/152aa2fa-c942-4a3f-97cb-3d8f0bbbd3ad_clip.mp4",
+              "thumbnail_url": "https://aura-storage.s3.amazonaws.com/thumbnails/152aa2fa-c942-4a3f-97cb-3d8f0bbbd3ad_thumb.jpg",
               "review_status": "queued",
               "destination_agency": "school_zone_unit",
               "confidence_score": 0.95,
               "reviewer_comments": "",
-              "created_at": "2025-08-07T16:44:31.473738",
+              "created_at": "2025-08-07T16:45:29.850543",
               "reviewed_at": null
             }
           ],
@@ -284,19 +300,19 @@
     {
       "test": "KPIs Dashboard",
       "success": true,
-      "details": "Events today: 12, Open WOs: 2, Citations: 9, Fines: $1800.0",
-      "timestamp": "2025-08-07T16:44:32.013643",
+      "details": "Events today: 20, Open WOs: 3, Citations: 15, Fines: $3000.0",
+      "timestamp": "2025-08-07T16:45:30.378263",
       "data": {
-        "events_today": 12,
-        "work_orders_open": 2,
+        "events_today": 20,
+        "work_orders_open": 3,
         "work_orders_closed": 0,
-        "citations_issued": 9,
+        "citations_issued": 15,
         "citations_paid": 0,
         "citations_contested": 0,
-        "total_fine_value": 1800.0,
+        "total_fine_value": 3000.0,
         "avg_sla_hours": 48.0,
-        "grant_potential": 270.0,
-        "video_reviews_queued": 6,
+        "grant_potential": 450.0,
+        "video_reviews_queued": 10,
         "video_reviews_confirmed": 0,
         "dispute_rate": 0.0,
         "video_confirm_rate": 0.0,
@@ -307,17 +323,17 @@
     {
       "test": "Get Work Orders",
       "success": true,
-      "details": "Retrieved 3 work orders",
-      "timestamp": "2025-08-07T16:44:32.535771",
+      "details": "Retrieved 5 work orders",
+      "timestamp": "2025-08-07T16:45:30.897818",
       "data": {
-        "count": 3
+        "count": 5
       }
     },
     {
       "test": "Update Work Order",
       "success": false,
       "details": "Failed to update: {'raw_response': 'Internal Server Error', 'status_code': 500}",
-      "timestamp": "2025-08-07T16:44:32.557439",
+      "timestamp": "2025-08-07T16:45:30.922278",
       "data": {
         "raw_response": "Internal Server Error",
         "status_code": 500
@@ -326,26 +342,26 @@
     {
       "test": "Get Citations",
       "success": true,
-      "details": "Retrieved 9 citations",
-      "timestamp": "2025-08-07T16:44:33.075505",
+      "details": "Retrieved 15 citations",
+      "timestamp": "2025-08-07T16:45:31.445831",
       "data": {
-        "count": 9
+        "count": 15
       }
     },
     {
       "test": "Get Video Reviews",
       "success": true,
-      "details": "Retrieved 6 video reviews",
-      "timestamp": "2025-08-07T16:44:33.592173",
+      "details": "Retrieved 10 video reviews",
+      "timestamp": "2025-08-07T16:45:31.965451",
       "data": {
-        "count": 6
+        "count": 10
       }
     },
     {
       "test": "Get Event Clusters",
       "success": false,
       "details": "Failed to get clusters: {'raw_response': 'Internal Server Error', 'status_code': 500}",
-      "timestamp": "2025-08-07T16:44:34.110462",
+      "timestamp": "2025-08-07T16:45:32.488750",
       "data": {
         "raw_response": "Internal Server Error",
         "status_code": 500
