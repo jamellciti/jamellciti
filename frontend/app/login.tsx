@@ -34,9 +34,9 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      console.log('Attempting login with:', { email, backend_url: EXPO_PUBLIC_BACKEND_URL });
+      console.log('Attempting login with:', { email, backend_url: BACKEND_URL });
       
-      const response = await fetch(`${EXPO_PUBLIC_BACKEND_URL}/api/auth/login`, {
+      const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
