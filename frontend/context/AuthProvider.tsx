@@ -113,31 +113,37 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // 1️⃣ Complete login function with full await chain
   const login = async (email: string, password: string): Promise<void> => {
     try {
-      console.log('🔐 Starting login process for:', email);
+      console.log('🔐 AUTHPROVIDER LOGIN CALLED for:', email);
+      console.log('🔐 API_BASE:', API_BASE);
       setAuthState(s => ({ ...s, loading: true, error: null }));
 
       // Step 1: Authenticate and get token
+      console.log('🔐 About to fetch login API...');
       const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
+      console.log('🔐 Login API response status:', res.status);
+
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({ detail: 'Login failed' }));
+        console.error('🚫 Login API failed:', errorData);
         throw new Error(errorData.detail || `Login failed: ${res.status}`);
       }
 
       const { access_token, user: userData } = await res.json();
       console.log('✅ Authentication successful for:', userData.email);
+      console.log('✅ Token preview:', access_token.slice(0, 12) + '...');
 
       // Step 2: Persist token with expiry
+      console.log('💾 About to store token...');
       await storeToken(access_token, 86400); // 24 hours
       
       // Step 3: Verify token works by fetching user profile
-      console.log('🔍 Verifying token by fetching user profile...');
+      console.log('🔍 Verifying token by fetching KPI endpoint...');
       
-      // Use our fetcher which automatically includes Authorization header
       const userProfile = await fetch(`${API_BASE}/api/kpis`, {
         headers: { 
           'Authorization': `Bearer ${access_token}`,
@@ -145,13 +151,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         },
       });
 
+      console.log('🔍 KPI verification response:', userProfile.status);
+
       if (!userProfile.ok) {
+        console.error('🚫 Token verification failed:', userProfile.status);
         throw new Error('Token verification failed');
       }
 
       console.log('✅ Token verified successfully');
 
       // Step 4: Update auth context
+      console.log('🎯 Updating auth state...');
       setAuthState({
         user: userData,
         token: access_token,
@@ -161,17 +171,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('🎯 Login complete - navigating based on consent level:', userData.consent_level);
 
-      // Step 5: Navigate based on user state
-      if (!userData.consent_level || userData.consent_level === 'none') {
-        console.log('🔄 Redirecting to consent wizard');
-        router.replace('/consent-wizard');
-      } else {
-        console.log('🔄 Redirecting to dashboard');
-        router.replace('/dashboard');
-      }
+      // Step 5: Navigate based on user state  
+      // Use queueMicrotask to ensure navigation happens after state update
+      queueMicrotask(() => {
+        if (!userData.consent_level || userData.consent_level === 'none') {
+          console.log('🔄 Navigating to consent wizard');
+          router.replace('/consent-wizard');
+        } else {
+          console.log('🔄 Navigating to dashboard');
+          router.replace('/dashboard');
+        }
+      });
 
     } catch (err: any) {
-      console.error('❌ LOGIN ERROR:', err);
+      console.error('❌ AUTHPROVIDER LOGIN ERROR:', err);
+      console.error('❌ Error stack:', err.stack);
       setAuthState(s => ({ 
         ...s, 
         loading: false, 
