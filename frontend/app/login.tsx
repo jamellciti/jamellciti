@@ -96,13 +96,25 @@ export default function Login() {
       console.log('✅ Demo auth data stored successfully');
       await storage.debugKeys();
 
-      // Navigate based on consent level
-      if (!data.user.consent_level || data.user.consent_level === 'none') {
-        console.log('🔄 Demo: Redirecting to consent wizard');
-        router.replace('/consent-wizard');
+      // Use window.location for web compatibility
+      if (typeof window !== 'undefined') {
+        // Navigate based on consent level
+        if (!data.user.consent_level || data.user.consent_level === 'none') {
+          console.log('🔄 Demo: Using window.location to navigate to consent wizard');
+          window.location.href = '/consent-wizard';
+        } else {
+          console.log('🔄 Demo: Using window.location to navigate to dashboard');
+          window.location.href = '/dashboard';
+        }
       } else {
-        console.log('🔄 Demo: Redirecting to dashboard');
-        router.replace('/dashboard');
+        // Fallback to expo router for native
+        if (!data.user.consent_level || data.user.consent_level === 'none') {
+          console.log('🔄 Demo: Using router to navigate to consent wizard');
+          router.replace('/consent-wizard');
+        } else {
+          console.log('🔄 Demo: Using router to navigate to dashboard');
+          router.replace('/dashboard');
+        }
       }
         
     } catch (error) {
