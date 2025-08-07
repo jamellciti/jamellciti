@@ -69,13 +69,25 @@ export default function Login() {
         console.log('Login successful, user data:', data.user);
         console.log('User consent level:', data.user.consent_level);
 
-        // Check if user needs consent setup
-        if (!data.user.consent_level || data.user.consent_level === 'none') {
-          console.log('Redirecting to consent wizard');
-          router.replace('/consent-wizard');
+        // Force navigation with window.location for web compatibility
+        if (typeof window !== 'undefined') {
+          // Check if user needs consent setup
+          if (!data.user.consent_level || data.user.consent_level === 'none') {
+            console.log('Using window.location to navigate to consent wizard');
+            window.location.href = '/consent-wizard';
+          } else {
+            console.log('Using window.location to navigate to dashboard');
+            window.location.href = '/dashboard';
+          }
         } else {
-          console.log('Redirecting to dashboard');
-          router.replace('/dashboard');
+          // Use expo router for native
+          if (!data.user.consent_level || data.user.consent_level === 'none') {
+            console.log('Redirecting to consent wizard');
+            router.replace('/consent-wizard');
+          } else {
+            console.log('Redirecting to dashboard');
+            router.replace('/dashboard');
+          }
         }
       } else {
         console.error('Login failed:', data);
