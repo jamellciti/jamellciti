@@ -18,16 +18,23 @@ export default function RootLayout() {
   );
 }
 
+// Loading screen component  
+const LoadingScreen = () => (
+  <View style={styles.loadingContainer}>
+    <ActivityIndicator size="large" color="#00CED1" />
+  </View>
+);
+
 // Inner layout with auth-aware routing
 function InnerLayout() {
   const { loading, token } = useAuth();
 
   console.log('🗂️ InnerLayout render - loading:', loading, 'token:', !!token);
 
-  // Show splash screen while loading
+  // Show loading screen while checking authentication
   if (loading) {
-    console.log('🗂️ Showing SplashScreen during loading');
-    return <SplashScreen />;
+    console.log('🗂️ Showing LoadingScreen during authentication check');
+    return <LoadingScreen />;
   }
 
   console.log('🗂️ Rendering Stack with explicit screen registration');
