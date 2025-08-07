@@ -70,14 +70,47 @@ export default function Login() {
 
   const handleDemoLogin = async () => {
     console.log('🎯 Demo login triggered');
+    
+    // Set credentials and trigger login immediately
     setEmail('admin@aura.vision');
     setPassword('demo123');
-    
-    // Wait for state to update, then trigger login
-    setTimeout(async () => {
-      console.log('🎯 Triggering handleLogin after state update');
-      await handleLogin();
-    }, 100);
+    setIsLoading(true);
+
+    try {
+      console.log('🔐 Demo login: calling auth API directly');
+      const data = await authFetcher(endpoints.AUTH_LOGIN, { 
+        email: 'admin@aura.vision', 
+        password: 'demo123' 
+      });
+      
+      console.log('🔐 Demo login successful:', { 
+        user: data.user.email, 
+        consent_level: data.user.consent_level,
+        token_preview: data.access_token.slice(0, 12) 
+      });
+
+      // Store auth token and user info
+      await storage.setItem('auth_token', data.access_token);
+      await storage.setItem('user_info', JSON.stringify(data.user));
+
+      console.log('✅ Demo auth data stored successfully');
+      await storage.debugKeys();
+
+      // Navigate based on consent level
+      if (!data.user.consent_level || data.user.consent_level === 'none') {
+        console.log('🔄 Demo: Redirecting to consent wizard');
+        router.replace('/consent-wizard');
+      } else {
+        console.log('🔄 Demo: Redirecting to dashboard');
+        router.replace('/dashboard');
+      }
+        
+    } catch (error) {
+      console.error('❌ Demo login error:', error);
+      Alert.alert('Demo Login Failed', error.message || 'Network error. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
