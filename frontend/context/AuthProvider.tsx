@@ -172,16 +172,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log('🎯 Login complete - navigating based on consent level:', userData.consent_level);
 
       // Step 5: Navigate based on user state  
-      // Use queueMicrotask to ensure navigation happens after state update (Expo Router v2 fix)
+      // Use window.location for web (Expo Router navigation issue)
       queueMicrotask(() => {
         console.log('🔄 queueMicrotask: About to navigate...');
-        if (!userData.consent_level || userData.consent_level === 'none') {
-          console.log('🔄 queueMicrotask: Navigating to consent wizard');
-          router.replace('/consent-wizard');
+        
+        const targetPath = (!userData.consent_level || userData.consent_level === 'none') 
+          ? '/consent-wizard' 
+          : '/dashboard';
+        
+        console.log('🔄 queueMicrotask: Target path:', targetPath);
+        
+        // For web, use window.location as Expo Router isn't working  
+        if (typeof window !== 'undefined') {
+          console.log('🌐 Using window.location for web navigation');
+          window.location.href = targetPath;
         } else {
-          console.log('🔄 queueMicrotask: Navigating to dashboard');
-          router.replace('/dashboard');
+          console.log('📱 Using expo router for native navigation');
+          router.replace(targetPath as any);
         }
+        
         console.log('🔄 queueMicrotask: Navigation call completed');
       });
 
