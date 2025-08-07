@@ -189,41 +189,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Check for stored token on app boot
   useEffect(() => {
-    console.log('🏁 bootAuth useEffect start - authState:', authState.loading, authState.token, 'executed:', bootAuthExecuted.current);
-    
     // Prevent multiple executions of bootAuth
     if (bootAuthExecuted.current) {
-      console.log('🏁 bootAuth already executed, skipping');
       return;
     }
     
     // Skip bootAuth if we already have a token (avoid overriding fresh login)
     if (authState.token) {
-      console.log('🏁 Already authenticated with token, skipping bootAuth');
-      return;
-    }
-    
-    // Skip bootAuth if we're currently navigating
-    if (isNavigating) {
-      console.log('🏁 Currently navigating, skipping bootAuth');
       return;
     }
     
     const bootAuth = async () => {
       try {
         bootAuthExecuted.current = true;
-        console.log('🏁 bootAuth function start - setting executed flag to true');
         
         const token = await getStoredToken();
-        console.log('🏁 Retrieved token:', token ? token.slice(0, 12) + '...' : null);
         
         if (!token) {
-          console.log('🏁 No token found, setting loading=false');
           setAuthState({ user: null, token: null, loading: false, error: null });
           return;
         }
 
-        console.log('🏁 Token found, verifying with API...');
         // Verify token by fetching user profile
         const res = await fetch(`${API_BASE}/api/v1/auth/me`, {
           headers: { 
@@ -233,16 +219,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         });
 
         if (!res.ok) {
-          console.log('🏁 Token verification failed, clearing token and setting loading=false');
           // Clear invalid token and set loading to false BEFORE navigation
           await clearStoredToken();
           setAuthState({ user: null, token: null, loading: false, error: null });
           return;
         }
 
-        console.log('🏁 Token verified, getting user info...');
         const userInfo = await res.json();
-        console.log('🏁 User info received, setting auth state with loading=false');
 
         setAuthState({ 
           user: userInfo, 
@@ -250,11 +233,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           loading: false, 
           error: null 
         });
-        
-        console.log('🏁 bootAuth completed successfully');
 
       } catch (error) {
-        console.log('🏁 bootAuth error:', error);
         // Ensure loading state is cleared on any error
         await clearStoredToken();
         setAuthState({ user: null, token: null, loading: false, error: null });
