@@ -31,14 +31,12 @@ export default function Login() {
       return;
     }
 
-    clearError(); // Clear previous errors
+    clearError();
     
     try {
       await login(email, password);
-      // Navigation is handled by the login function
     } catch (err) {
       // Error handling is managed by AuthProvider
-      console.log('Login handled by AuthProvider');
     }
   };
 
