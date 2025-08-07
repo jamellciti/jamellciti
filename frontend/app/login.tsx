@@ -119,11 +119,11 @@ export default function Login() {
 
             {/* Login Button */}
             <TouchableOpacity
-              style={[styles.loginButton, isLoading && styles.disabledButton]}
+              style={[styles.loginButton, loading && styles.disabledButton]}
               onPress={handleLogin}
-              disabled={isLoading}
+              disabled={loading}
             >
-              {isLoading ? (
+              {loading ? (
                 <ActivityIndicator color="white" />
               ) : (
                 <>
@@ -137,7 +137,7 @@ export default function Login() {
             <TouchableOpacity
               style={styles.demoButton}
               onPress={handleDemoLogin}
-              disabled={isLoading}
+              disabled={loading}
             >
               <MaterialIcons name="preview" size={20} color="#00D2FF" />
               <Text style={styles.demoButtonText}>Demo Login</Text>
