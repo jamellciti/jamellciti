@@ -217,7 +217,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Check for stored token on app boot
   useEffect(() => {
-    console.log('🏁 bootAuth useEffect start, isNavigating:', isNavigating);
+    console.log('🏁 bootAuth useEffect start - authState:', authState.loading, authState.token);
+    
+    // Skip bootAuth if we already have a token (avoid overriding fresh login)
+    if (authState.token) {
+      console.log('🏁 Skipping bootAuth - already authenticated with token');
+      return;
+    }
     
     // Skip bootAuth if we're currently navigating
     if (isNavigating) {
@@ -277,7 +283,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     bootAuth();
-  }, [isNavigating]); // Add isNavigating as dependency
+  }, []); // Remove isNavigating dependency to prevent re-runs
 
   const value: AuthContextType = {
     ...authState,
