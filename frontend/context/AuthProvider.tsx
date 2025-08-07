@@ -124,18 +124,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await storeToken(access_token, 86400);
       
       // Step 3: Verify token works by fetching user profile
-      const me = await fetcher('/api/v1/auth/me');
+      const meRes = await fetch(`${API_BASE}/api/v1/auth/me`, {
+        headers: { 
+          'Authorization': `Bearer ${access_token}`,
+          'Content-Type': 'application/json' 
+        },
+      });
+
+      let userProfile = userData;
+      if (meRes.ok) {
+        userProfile = await meRes.json();
+      }
 
       // Step 4: Commit state BEFORE navigation (critical for guards)
       setAuthState({
-        user: me,
+        user: userProfile,
         token: access_token,
         loading: false,
         error: null,
       });
 
       // Step 5: Navigate with router.replace (synchronous, cross-platform)
-      const targetPath = (!me.consent_level || me.consent_level === 'none') 
+      const targetPath = (!userProfile.consent_level || userProfile.consent_level === 'none') 
         ? '/consent-wizard' 
         : '/dashboard';
       
