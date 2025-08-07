@@ -219,23 +219,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Check for stored token on app boot
   useEffect(() => {
-    console.log('🏁 bootAuth useEffect start - authState:', authState.loading, authState.token);
+    console.log('🏁 bootAuth useEffect start - authState:', authState.loading, authState.token, 'executed:', bootAuthExecuted.current);
+    
+    // Prevent multiple executions of bootAuth
+    if (bootAuthExecuted.current) {
+      console.log('🏁 bootAuth already executed, skipping');
+      return;
+    }
     
     // Skip bootAuth if we already have a token (avoid overriding fresh login)
     if (authState.token) {
-      console.log('🏁 Skipping bootAuth - already authenticated with token');
+      console.log('🏁 Already authenticated with token, skipping bootAuth');
       return;
     }
     
     // Skip bootAuth if we're currently navigating
     if (isNavigating) {
-      console.log('🏁 Skipping bootAuth - currently navigating');
+      console.log('🏁 Currently navigating, skipping bootAuth');
       return;
     }
     
     const bootAuth = async () => {
       try {
-        console.log('🏁 bootAuth function start');
+        bootAuthExecuted.current = true;
+        console.log('🏁 bootAuth function start - setting executed flag to true');
+        
         const token = await getStoredToken();
         console.log('🏁 Retrieved token:', token ? token.slice(0, 12) + '...' : null);
         
@@ -273,19 +281,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           error: null 
         });
         
-        console.log('🏁 bootAuth success, loading=false');
+        console.log('🏁 bootAuth completed successfully');
 
       } catch (error) {
         console.log('🏁 bootAuth error:', error);
         // Ensure loading state is cleared on any error
         await clearStoredToken();
         setAuthState({ user: null, token: null, loading: false, error: null });
-        console.log('🏁 Error handled, loading=false');
       }
     };
 
     bootAuth();
-  }, []); // Remove isNavigating dependency to prevent re-runs
+  }, []); // Only run once on mount
 
   const value: AuthContextType = {
     ...authState,
