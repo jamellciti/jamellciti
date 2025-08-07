@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 
+console.log('🔥 debugLogin.tsx loaded at', new Date().toISOString());
+
 export default function DebugLogin() {
   return (
     <View style={styles.container}>
