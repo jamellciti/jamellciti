@@ -265,10 +265,9 @@ metadata:
 test_plan:
   current_focus:
     - "Authentication Flow (Login/Register)"
-  stuck_tasks:
-    - "Authentication Flow (Login/Register)"
+  stuck_tasks: []
   test_all: false
-  test_priority: "stuck_first"
+  test_priority: "high_first"
 
 agent_communication:
   - agent: "main"
