@@ -60,11 +60,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (Platform.OS === 'web') {
       localStorage.setItem('token', token);
       localStorage.setItem('token_exp', expiry);
-      console.log('🌐 Token stored in localStorage:', token.slice(0, 12) + '...');
     } else {
       await SecureStore.setItemAsync('token', token);
       await SecureStore.setItemAsync('token_exp', expiry);
-      console.log('🔒 Token stored in SecureStore:', token.slice(0, 12) + '...');
     }
   };
 
@@ -74,10 +72,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const expiry = localStorage.getItem('token_exp');
       
       if (token && expiry && Date.now() < parseInt(expiry)) {
-        console.log('🌐 Valid token retrieved from localStorage:', token.slice(0, 12) + '...');
         return token;
       } else if (token) {
-        console.log('🌐 Token expired, clearing localStorage');
         localStorage.removeItem('token');
         localStorage.removeItem('token_exp');
       }
@@ -87,10 +83,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const expiry = await SecureStore.getItemAsync('token_exp');
       
       if (token && expiry && Date.now() < parseInt(expiry)) {
-        console.log('🔒 Valid token retrieved from SecureStore:', token.slice(0, 12) + '...');
         return token;
       } else if (token) {
-        console.log('🔒 Token expired, clearing SecureStore');
         await SecureStore.deleteItemAsync('token');
         await SecureStore.deleteItemAsync('token_exp');
       }
@@ -102,11 +96,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (Platform.OS === 'web') {
       localStorage.removeItem('token');
       localStorage.removeItem('token_exp');
-      console.log('🌐 Token cleared from localStorage');
     } else {
       await SecureStore.deleteItemAsync('token');
       await SecureStore.deleteItemAsync('token_exp');
-      console.log('🔒 Token cleared from SecureStore');
     }
   };
 
