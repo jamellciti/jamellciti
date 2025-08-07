@@ -448,9 +448,106 @@ class AuraVisionAPITester:
         
         return passed, total, self.test_results
 
+    def test_v1_auth_endpoints(self):
+        """Test the v1 auth endpoints that frontend expects"""
+        print("\n🔍 Testing V1 Authentication Endpoints (Frontend Expected)")
+        
+        # Test v1 login endpoint
+        login_data = {
+            "email": DEMO_USER_EMAIL,
+            "password": DEMO_USER_PASSWORD
+        }
+        
+        success, data = self.make_request("POST", "/v1/auth/login", login_data)
+        self.log_test(
+            "V1 Auth Login (/api/v1/auth/login)",
+            success,
+            f"V1 login endpoint {'works' if success else 'not found'}: {data}",
+            data
+        )
+        
+        # Test v1 auth/me endpoint
+        if self.auth_token:
+            success, data = self.make_request("GET", "/v1/auth/me")
+            self.log_test(
+                "V1 Auth Me (/api/v1/auth/me)",
+                success,
+                f"V1 auth/me endpoint {'works' if success else 'not found'}: {data}",
+                data
+            )
+        else:
+            self.log_test(
+                "V1 Auth Me (/api/v1/auth/me)",
+                False,
+                "Cannot test - no auth token available",
+                {}
+            )
+        
+        return success
+    
+    def test_auth_token_validation(self):
+        """Test JWT token validation and expiration"""
+        if not self.auth_token:
+            self.log_test("Token Validation", False, "No auth token available")
+            return False
+        
+        # Test token with a protected endpoint
+        success, data = self.make_request("GET", "/kpis")
+        self.log_test(
+            "JWT Token Validation",
+            success,
+            f"Token {'valid' if success else 'invalid'} for protected endpoints",
+            data if not success else {"token_works": True}
+        )
+        
+        # Test with invalid token
+        original_token = self.auth_token
+        self.auth_token = "invalid_token_12345"
+        
+        success, data = self.make_request("GET", "/kpis")
+        self.log_test(
+            "Invalid Token Rejection",
+            not success,  # We want this to fail
+            f"Invalid token properly {'rejected' if not success else 'accepted (BAD!)'}",
+            data
+        )
+        
+        # Restore original token
+        self.auth_token = original_token
+        return True
+
 def main():
     """Main test execution"""
     tester = AuraVisionAPITester()
+    
+    # Run focused authentication tests first
+    print("🔐 FOCUSED AUTHENTICATION TESTING")
+    print("=" * 60)
+    
+    auth_tests = [
+        ("API Health", tester.test_api_health),
+        ("User Registration", tester.test_user_registration),
+        ("User Authentication (/api/auth/login)", tester.test_user_login),
+        ("V1 Auth Endpoints", tester.test_v1_auth_endpoints),
+        ("Token Validation", tester.test_auth_token_validation),
+    ]
+    
+    auth_passed = 0
+    auth_total = len(auth_tests)
+    
+    for test_name, test_func in auth_tests:
+        try:
+            if test_func():
+                auth_passed += 1
+        except Exception as e:
+            tester.log_test(test_name, False, f"Test exception: {str(e)}")
+        time.sleep(0.5)
+    
+    print(f"\n🔐 Authentication Tests: {auth_passed}/{auth_total} passed")
+    
+    # Run full test suite if requested
+    print(f"\n🚀 Running Full Backend Test Suite")
+    print("=" * 60)
     passed, total, results = tester.run_all_tests()
     
     # Save detailed results
@@ -460,6 +557,8 @@ def main():
                 "passed": passed,
                 "total": total,
                 "success_rate": round(passed/total*100, 1) if total > 0 else 0,
+                "auth_tests_passed": auth_passed,
+                "auth_tests_total": auth_total,
                 "timestamp": datetime.now().isoformat()
             },
             "detailed_results": results
