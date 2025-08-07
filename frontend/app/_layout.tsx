@@ -29,16 +29,11 @@ const LoadingScreen = () => (
 function InnerLayout() {
   const { loading, token } = useAuth();
 
-  console.log('🗂️ InnerLayout render - loading:', loading, 'token:', !!token);
-
   // Show loading screen while checking authentication
   if (loading) {
-    console.log('🗂️ Showing LoadingScreen during authentication check');
     return <LoadingScreen />;
   }
 
-  console.log('🗂️ Rendering Stack with dashboard always available for debug');
-  
   return (
     <Stack
       screenOptions={{
@@ -46,21 +41,6 @@ function InnerLayout() {
         contentStyle: { backgroundColor: '#0A0A0A' },
       }}
     >
-      {/* Always include debugLogin for testing */}
-      <Stack.Screen 
-        name="debugLogin" 
-        options={{ headerShown: false }} 
-      />
-      
-      {/* Always include dashboard for debug - moved outside conditional */}
-      <Stack.Screen 
-        name="dashboard" 
-        options={{ 
-          title: 'Dashboard',
-          headerShown: false 
-        }} 
-      />
-      
       {/* Public screens - only when NOT authenticated */}
       {!token && (
         <>
@@ -82,6 +62,13 @@ function InnerLayout() {
       {/* Protected screens - only when authenticated */}
       {token && (
         <>
+          <Stack.Screen 
+            name="dashboard" 
+            options={{ 
+              title: 'Dashboard',
+              headerShown: false 
+            }} 
+          />
           <Stack.Screen 
             name="trust" 
             options={{ 
