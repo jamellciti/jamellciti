@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from 'expo-router';
+import { Stack, Redirect } from 'expo-router';
 import AuthProvider, { useAuth } from '../context/AuthProvider';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -11,14 +11,21 @@ const LoadingScreen = () => (
   </View>
 );
 
-// App content with auth guard
+// App content with official Expo Router auth guard pattern
 const AppContent = () => {
-  const { loading } = useAuth();
+  const { loading, token } = useAuth();
 
+  // Show loading screen while checking authentication
   if (loading) {
     return <LoadingScreen />;
   }
 
+  // Redirect to login if no token (official pattern)
+  if (!token) {
+    return <Redirect href="/login" />;
+  }
+
+  // User is authenticated - show app content
   return (
     <Stack
       screenOptions={{
