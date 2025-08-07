@@ -49,20 +49,16 @@ export default function Login() {
         await AsyncStorage.setItem('auth_token', data.access_token);
         await AsyncStorage.setItem('user_info', JSON.stringify(data.user));
 
-        Alert.alert('Success', 'Login successful!', [
-          {
-            text: 'OK',
-            onPress: () => {
-              // Check if user needs consent setup
-              if (!data.user.consent_level || data.user.consent_level === 'none') {
-                router.replace('/consent-wizard');
-              } else {
-                router.replace('/');
-              }
-            },
-          },
-        ]);
+        console.log('Login successful, user data:', data.user);
+
+        // Check if user needs consent setup
+        if (!data.user.consent_level || data.user.consent_level === 'none') {
+          router.replace('/consent-wizard');
+        } else {
+          router.replace('/dashboard');
+        }
       } else {
+        console.error('Login failed:', data);
         Alert.alert('Login Failed', data.detail || 'Invalid credentials');
       }
     } catch (error) {
