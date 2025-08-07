@@ -35,81 +35,49 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      console.log('Attempting login with:', { email, backend_url: BACKEND_URL });
+      console.log('🔐 Attempting login with:', { email });
       
-      const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+      const data = await authFetcher(endpoints.AUTH_LOGIN, { email, password });
+      
+      console.log('🔐 Login successful, received data:', { 
+        user: data.user.email, 
+        token_preview: data.access_token.slice(0, 12) 
       });
 
-      console.log('Login response status:', response.status);
-      const data = await response.json();
-      console.log('Login response data:', data);
+      // Store auth token and user info using secure storage
+      await storage.setItem('auth_token', data.access_token);
+      await storage.setItem('user_info', JSON.stringify(data.user));
 
-      if (response.ok) {
-        // Store auth token and user info
-        console.log('Storing auth data...');
-        
-        try {
-          await AsyncStorage.setItem('auth_token', data.access_token);
-          await AsyncStorage.setItem('user_info', JSON.stringify(data.user));
-          console.log('Auth data stored successfully');
-        } catch (storageError) {
-          console.error('Storage error:', storageError);
-          // Fallback to localStorage for web
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('auth_token', data.access_token);
-            localStorage.setItem('user_info', JSON.stringify(data.user));
-            console.log('Using localStorage fallback');
-          }
-        }
+      console.log('✅ Auth data stored successfully');
+      
+      // Debug: verify storage worked
+      await storage.debugKeys();
 
-        console.log('Login successful, user data:', data.user);
-        console.log('User consent level:', data.user.consent_level);
-
-        // Force navigation with window.location for web compatibility
-        if (typeof window !== 'undefined') {
-          // Check if user needs consent setup
-          if (!data.user.consent_level || data.user.consent_level === 'none') {
-            console.log('Using window.location to navigate to consent wizard');
-            window.location.href = '/consent-wizard';
-          } else {
-            console.log('Using window.location to navigate to dashboard');
-            window.location.href = '/dashboard';
-          }
-        } else {
-          // Use expo router for native
-          if (!data.user.consent_level || data.user.consent_level === 'none') {
-            console.log('Redirecting to consent wizard');
-            router.replace('/consent-wizard');
-          } else {
-            console.log('Redirecting to dashboard');
-            router.replace('/dashboard');
-          }
-        }
+      // Navigate based on consent level
+      if (!data.user.consent_level || data.user.consent_level === 'none') {
+        console.log('🔄 Redirecting to consent wizard');
+        router.replace('/consent-wizard');
       } else {
-        console.error('Login failed:', data);
-        Alert.alert('Login Failed', data.detail || 'Invalid credentials');
+        console.log('🔄 Redirecting to dashboard');
+        router.replace('/dashboard');
       }
+        
     } catch (error) {
-      console.error('Login error:', error);
-      Alert.alert('Error', 'Network error. Please try again.');
+      console.error('❌ Login error:', error);
+      Alert.alert('Login Failed', error.message || 'Network error. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleDemoLogin = async () => {
-    console.log('Demo login triggered');
+    console.log('🎯 Demo login triggered');
     setEmail('admin@aura.vision');
     setPassword('demo123');
     
-    // Wait a moment for state to update, then trigger login
+    // Wait for state to update, then trigger login
     setTimeout(async () => {
-      console.log('Triggering handleLogin after state update');
+      console.log('🎯 Triggering handleLogin after state update');
       await handleLogin();
     }, 100);
   };
