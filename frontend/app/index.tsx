@@ -20,24 +20,33 @@ export default function Index() {
 
   const checkAuthStatus = async () => {
     try {
-      const token = await AsyncStorage.getItem('auth_token');
-      const user = await AsyncStorage.getItem('user_info');
+      console.log('🔍 Checking auth status...');
+      const token = await storage.getItem('auth_token');
+      const userInfoStr = await storage.getItem('user_info');
       
-      if (token && user) {
-        setUserInfo(JSON.parse(user));
+      if (token && userInfoStr) {
+        const userObj = JSON.parse(userInfoStr);
+        console.log('✅ Found stored auth data:', { 
+          email: userObj.email, 
+          consent: userObj.consent_level,
+          token_preview: token.slice(0, 12)
+        });
+        
+        setUserInfo(userObj);
         setIsAuthenticated(true);
         
         // Check if user needs to set consent level
-        const userObj = JSON.parse(user);
         if (!userObj.consent_level || userObj.consent_level === 'none') {
+          console.log('🔄 User needs consent setup, redirecting...');
           router.replace('/consent-wizard');
           return;
         }
       } else {
+        console.log('❌ No stored auth data found');
         setIsAuthenticated(false);
       }
     } catch (error) {
-      console.error('Error checking auth status:', error);
+      console.error('❌ Error checking auth status:', error);
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
