@@ -15,17 +15,22 @@ const LoadingScreen = () => (
 const AppContent = () => {
   const { loading, token } = useAuth();
 
+  console.log('🚦 Guard – loading:', loading, 'token:', token);
+
   // Show loading screen while checking authentication
   if (loading) {
+    console.log('🚦 Showing loading screen');
     return <LoadingScreen />;
   }
 
   // Redirect to login if no token (official pattern)
   if (!token) {
+    console.log('🚦 No token, redirecting to login');
     return <Redirect href="/login" />;
   }
 
   // User is authenticated - show app content
+  console.log('🚦 Authenticated, rendering Stack');
   return (
     <Stack
       screenOptions={{
