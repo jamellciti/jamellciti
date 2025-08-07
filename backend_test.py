@@ -321,8 +321,8 @@ class AuraVisionAPITester:
             # Test updating a work order if any exist
             if work_orders:
                 wo_id = work_orders[0].get("id")
-                update_data = {"status": "in_progress"}
-                success, response = self.make_request("PATCH", f"/work-orders/{wo_id}", update_data)
+                endpoint = f"/work-orders/{wo_id}?status=in_progress"
+                success, response = self.make_request("PATCH", endpoint)
                 
                 self.log_test(
                     "Update Work Order",
