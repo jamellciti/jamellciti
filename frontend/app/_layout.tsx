@@ -31,6 +31,18 @@ function InnerLayout() {
 
   console.log('🗂️ InnerLayout render - loading:', loading, 'token:', !!token);
 
+  // BYPASS AUTH FOR DEBUG SCREEN ONLY
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+  if (currentPath === '/debugLogin') {
+    console.log('🔍 DEBUG: Bypassing auth for debugLogin screen');
+    return (
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="debugLogin" options={{ headerShown: false }} />
+        <Stack.Screen name="dashboard" options={{ headerShown: false }} />
+      </Stack>
+    );
+  }
+
   // Show loading screen while checking authentication
   if (loading) {
     console.log('🗂️ Showing LoadingScreen during authentication check');
