@@ -152,6 +152,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       router.replace(targetPath as any);
 
+      // Final 5%: Force URL sync for web to ensure browser location updates immediately
+      if (Platform.OS === 'web') {
+        // Ensure React state and browser history are in sync
+        setTimeout(() => {
+          window.history.replaceState(null, '', targetPath);
+        }, 0);
+      }
+
     } catch (err: any) {
       setAuthState(s => ({ 
         ...s, 
