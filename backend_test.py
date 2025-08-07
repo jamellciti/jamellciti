@@ -84,15 +84,10 @@ class AuraVisionAPITester:
     
     def test_user_registration(self):
         """Test user registration"""
-        # First try to register the demo user
-        registration_data = {
-            "email": DEMO_USER_EMAIL,
-            "password": DEMO_USER_PASSWORD,
-            "role": "admin",
-            "city": "phoenix"
-        }
+        # Registration endpoint expects query parameters
+        endpoint = f"/auth/register?email={DEMO_USER_EMAIL}&password={DEMO_USER_PASSWORD}&role=admin&city=phoenix"
         
-        success, data = self.make_request("POST", "/auth/register", registration_data)
+        success, data = self.make_request("POST", endpoint)
         
         # Registration might fail if user already exists - that's okay
         if not success and "already exists" in str(data).lower():
