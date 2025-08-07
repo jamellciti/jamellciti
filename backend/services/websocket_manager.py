@@ -53,7 +53,7 @@ class ConnectionManager:
         message = json.dumps({
             "type": "event_update",
             "data": event_data
-        })
+        }, cls=DateTimeEncoder)
         await self.broadcast(message)
     
     async def broadcast_work_order_update(self, work_order_data: dict):
@@ -61,7 +61,7 @@ class ConnectionManager:
         message = json.dumps({
             "type": "work_order_update", 
             "data": work_order_data
-        })
+        }, cls=DateTimeEncoder)
         await self.broadcast(message)
     
     async def broadcast_citation_update(self, citation_data: dict):
@@ -69,7 +69,7 @@ class ConnectionManager:
         message = json.dumps({
             "type": "citation_update",
             "data": citation_data
-        })
+        }, cls=DateTimeEncoder)
         await self.broadcast(message)
     
     async def broadcast_video_review_update(self, video_review_data: dict):
@@ -77,7 +77,7 @@ class ConnectionManager:
         message = json.dumps({
             "type": "video_review_update",
             "data": video_review_data
-        })
+        }, cls=DateTimeEncoder)
         await self.broadcast(message)
     
     async def broadcast_cluster_update(self, cluster_data: dict):
@@ -85,7 +85,7 @@ class ConnectionManager:
         message = json.dumps({
             "type": "cluster_update",
             "data": cluster_data
-        })
+        }, cls=DateTimeEncoder)
         await self.broadcast(message)
 
 # Global connection manager instance
