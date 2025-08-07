@@ -1,7 +1,8 @@
 import React from 'react';
-import { Stack, SplashScreen } from 'expo-router';
+import { Stack } from 'expo-router';
 import AuthProvider, { useAuth } from '../context/AuthProvider';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 // Root layout with providers
