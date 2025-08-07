@@ -196,12 +196,9 @@ class AuraVisionAPITester:
             return False
         
         # Create API key first
-        api_key_data = {
-            "name": "test-device-key",
-            "city": "phoenix"
-        }
+        endpoint = "/admin/api-keys?name=test-device-key&city=phoenix"
         
-        success, key_response = self.make_request("POST", "/admin/api-keys", api_key_data)
+        success, key_response = self.make_request("POST", endpoint)
         if not success:
             self.log_test("Create API Key", False, f"Failed to create API key: {key_response}", key_response)
             return False
