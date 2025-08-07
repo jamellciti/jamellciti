@@ -50,6 +50,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     error: null,
   });
   
+  // Add flag to prevent bootAuth loops during navigation
+  const [isNavigating, setIsNavigating] = useState(false);
+  
   console.log('🛡️ AuthProvider render – authState:', authState);
   
   const router = useRouter();
