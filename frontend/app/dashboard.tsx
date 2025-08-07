@@ -82,19 +82,21 @@ export default function Dashboard() {
       setRecentEvents([
         {
           id: '1',
-          timestamp: '2024-01-15 14:30:00',
-          event_type: 'CITATION',
-          location: '5th & Main St',
-          confidence: 0.95,
-          severity: 'HIGH'
+          type: 'pothole',
+          lat: 40.7128,
+          lon: -74.0060,
+          severity: 4,
+          timestamp: '2024-01-15T14:30:00Z',
+          ai_flagged: true
         },
         {
           id: '2', 
-          timestamp: '2024-01-15 13:15:00',
-          event_type: 'WORK_ORDER',
-          location: '1st & Broadway',
-          confidence: 0.88,
-          severity: 'MEDIUM'
+          type: 'storm_drain_clog',
+          lat: 40.7589,
+          lon: -73.9851,
+          severity: 3,
+          timestamp: '2024-01-15T13:15:00Z',
+          ai_flagged: false
         }
       ]);
 
