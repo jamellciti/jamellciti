@@ -31,25 +31,13 @@ function InnerLayout() {
 
   console.log('🗂️ InnerLayout render - loading:', loading, 'token:', !!token);
 
-  // BYPASS AUTH FOR DEBUG SCREEN ONLY
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
-  if (currentPath === '/debugLogin') {
-    console.log('🔍 DEBUG: Bypassing auth for debugLogin screen');
-    return (
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="debugLogin" options={{ headerShown: false }} />
-        <Stack.Screen name="dashboard" options={{ headerShown: false }} />
-      </Stack>
-    );
-  }
-
   // Show loading screen while checking authentication
   if (loading) {
     console.log('🗂️ Showing LoadingScreen during authentication check');
     return <LoadingScreen />;
   }
 
-  console.log('🗂️ Rendering Stack with explicit screen registration');
+  console.log('🗂️ Rendering Stack with dashboard always available for debug');
   
   return (
     <Stack
@@ -58,36 +46,42 @@ function InnerLayout() {
         contentStyle: { backgroundColor: '#0A0A0A' },
       }}
     >
-      {/* Debug screen for testing router.replace */}
+      {/* Always include debugLogin for testing */}
       <Stack.Screen 
         name="debugLogin" 
         options={{ headerShown: false }} 
       />
       
-      {/* Public screens - always available */}
+      {/* Always include dashboard for debug - moved outside conditional */}
       <Stack.Screen 
-        name="login" 
-        options={{ headerShown: false }} 
+        name="dashboard" 
+        options={{ 
+          title: 'Dashboard',
+          headerShown: false 
+        }} 
       />
-      <Stack.Screen 
-        name="register" 
-        options={{ headerShown: false }} 
-      />
-      <Stack.Screen 
-        name="index" 
-        options={{ headerShown: false }} 
-      />
+      
+      {/* Public screens - only when NOT authenticated */}
+      {!token && (
+        <>
+          <Stack.Screen 
+            name="login" 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="register" 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="index" 
+            options={{ headerShown: false }} 
+          />
+        </>
+      )}
 
       {/* Protected screens - only when authenticated */}
       {token && (
         <>
-          <Stack.Screen 
-            name="dashboard" 
-            options={{ 
-              title: 'Dashboard',
-              headerShown: false 
-            }} 
-          />
           <Stack.Screen 
             name="trust" 
             options={{ 
