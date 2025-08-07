@@ -167,6 +167,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log('🚀 NAVIGATION: About to navigate to:', targetPath);
       console.log('🚀 NAVIGATION: User consent level:', userProfile.consent_level);
       
+      // Set navigation flag to prevent bootAuth re-execution
+      setIsNavigating(true);
+      
       router.replace(targetPath as any);
       console.log('🚀 NAVIGATION: router.replace() called');
 
@@ -177,7 +180,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setTimeout(() => {
           window.history.replaceState(null, '', targetPath);
           console.log('🚀 NAVIGATION: window.history.replaceState() executed');
-        }, 0);
+          // Clear navigation flag after URL sync
+          setIsNavigating(false);
+        }, 100);
+      } else {
+        // Clear navigation flag for native platforms
+        setTimeout(() => setIsNavigating(false), 100);
       }
 
     } catch (err: any) {
