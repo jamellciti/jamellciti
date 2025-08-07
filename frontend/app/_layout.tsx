@@ -100,14 +100,6 @@ function InnerLayout() {
           />
         </>
       )}
-
-      {/* Fallback: ensure login is always available if no token */}
-      {!token && (
-        <Stack.Screen 
-          name="login" 
-          options={{ headerShown: false }} 
-        />
-      )}
     </Stack>
   );
 }
