@@ -177,7 +177,7 @@ export default function Dashboard() {
           <View style={styles.headerContent}>
             <View>
               <Text style={styles.greeting}>Welcome back</Text>
-              <Text style={styles.userEmail}>{userInfo?.email}</Text>
+              <Text style={styles.userEmail}>{user?.email}</Text>
             </View>
             <TouchableOpacity
               style={styles.settingsButton}
