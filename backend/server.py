@@ -1192,6 +1192,29 @@ async def login(user_login: UserLogin):
         }
     }
 
+# V1 Authentication endpoints (for frontend compatibility)
+@api_router.post("/v1/auth/login")
+async def v1_login(user_login: UserLogin):
+    """V1 Authenticate user and return JWT token (frontend compatibility)"""
+    return await login(user_login)
+
+@api_router.get("/v1/auth/me")
+async def v1_get_current_user(user: dict = Depends(verify_user_token)):
+    """Get current user profile (V1 endpoint for frontend compatibility)"""
+    user_doc = await db.users.find_one({"id": user["user_id"]})
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    return {
+        "id": user_doc["id"],
+        "email": user_doc["email"],
+        "role": user_doc["role"],
+        "city": user_doc["city"],
+        "consent_level": user_doc.get("consent_level", "none"),
+        "subscription_tier": user_doc.get("subscription_tier", "aura_free"),
+        "created_at": user_doc["created_at"]
+    }
+
 @api_router.post("/auth/register")
 async def register(email: str, password: str, role: str = "admin", city: City = City.PHOENIX):
     """Register a new user"""
