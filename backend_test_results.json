@@ -3,14 +3,14 @@
     "passed": 10,
     "total": 11,
     "success_rate": 90.9,
-    "timestamp": "2025-08-07T14:30:34.386018"
+    "timestamp": "2025-08-07T14:31:33.380022"
   },
   "detailed_results": [
     {
       "test": "API Health Check",
       "success": true,
       "details": "API Status: active",
-      "timestamp": "2025-08-07T14:30:28.391877",
+      "timestamp": "2025-08-07T14:31:27.424388",
       "data": {
         "message": "Aura Vision API",
         "status": "active",
@@ -21,7 +21,7 @@
       "test": "User Registration",
       "success": true,
       "details": "Demo user admin@aura.vision already exists (expected)",
-      "timestamp": "2025-08-07T14:30:28.910262",
+      "timestamp": "2025-08-07T14:31:27.976258",
       "data": {
         "detail": "User already exists"
       }
@@ -30,7 +30,7 @@
       "test": "User Authentication",
       "success": true,
       "details": "Successfully authenticated admin@aura.vision",
-      "timestamp": "2025-08-07T14:30:29.477285",
+      "timestamp": "2025-08-07T14:31:28.541443",
       "data": {
         "user_id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9",
         "role": "admin"
@@ -40,29 +40,29 @@
       "test": "Get Consent Status",
       "success": true,
       "details": "Current consent level: civic",
-      "timestamp": "2025-08-07T14:30:30.006802",
+      "timestamp": "2025-08-07T14:31:29.064236",
       "data": {
         "level": "civic",
-        "updated_at": "2025-08-07T14:30:06.666000",
+        "updated_at": "2025-08-07T14:30:30.026000",
         "clip_ids_hash": []
       }
     },
     {
       "test": "Update Consent Level",
       "success": true,
-      "details": "Updated consent to CIVIC (CoC: a224c2f5dcd4...)",
-      "timestamp": "2025-08-07T14:30:30.032173",
+      "details": "Updated consent to CIVIC (CoC: 160f717caabc...)",
+      "timestamp": "2025-08-07T14:31:29.089530",
       "data": {
         "message": "Consent level updated successfully",
         "level": "civic",
-        "chain_of_custody": "a224c2f5dcd4468b4d5b4e3fc5be3d6e120d1e9342e2158d6459e25bc3a6d191"
+        "chain_of_custody": "160f717caabc7e62eb2e70e998f739ef6bb300dfd5bb9f2e316fa490fec770c4"
       }
     },
     {
       "test": "Subscription Status",
       "success": true,
       "details": "Subscription tier: aura_free, Active: True",
-      "timestamp": "2025-08-07T14:30:30.553352",
+      "timestamp": "2025-08-07T14:31:29.613676",
       "data": {
         "tier": "aura_free",
         "active": true,
@@ -73,71 +73,162 @@
     {
       "test": "Create API Key",
       "success": true,
-      "details": "Created API key: aura_fef3133...",
-      "timestamp": "2025-08-07T14:30:31.084566",
+      "details": "Created API key: aura_84d78b3...",
+      "timestamp": "2025-08-07T14:31:30.134840",
       "data": {
-        "api_key": "aura_fef31337c0fe",
+        "api_key": "aura_84d78b3df934",
         "name": "test-device-key",
         "city": "phoenix",
-        "created_at": "2025-08-07T14:30:31.067622"
+        "created_at": "2025-08-07T14:31:30.130690"
       }
     },
     {
       "test": "Ingest pothole Event",
-      "success": false,
-      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
-      "timestamp": "2025-08-07T14:30:31.143862",
+      "success": true,
+      "details": "Event 22e3cce3... \u2192 1 WO, 0 citations, 0 videos",
+      "timestamp": "2025-08-07T14:31:30.160615",
       "data": {
-        "raw_response": "Internal Server Error",
-        "status_code": 500
+        "event_id": "22e3cce3-7769-4749-b62e-f3e33bbfdf8e",
+        "status": "processed",
+        "actions": {
+          "work_orders": [
+            {
+              "id": "d98619cc-14b4-456b-a146-2b54e0aa85f4",
+              "event_id": "22e3cce3-7769-4749-b62e-f3e33bbfdf8e",
+              "type": "pothole",
+              "description": "Pothole detected at 33.4484, -112.0740 (severity: 4)",
+              "status": "open",
+              "created_at": "2025-08-07T14:31:30.156174",
+              "updated_at": "2025-08-07T14:31:30.156176",
+              "estimated_sla_hours": 48
+            }
+          ],
+          "citations": [],
+          "video_reviews": [],
+          "kpi_only": false
+        }
       }
     },
     {
       "test": "Ingest litter_dumping Event",
-      "success": false,
-      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
-      "timestamp": "2025-08-07T14:30:31.178275",
+      "success": true,
+      "details": "Event e5dc32de... \u2192 0 WO, 1 citations, 0 videos",
+      "timestamp": "2025-08-07T14:31:30.183470",
       "data": {
-        "raw_response": "Internal Server Error",
-        "status_code": 500
+        "event_id": "e5dc32de-03ec-4e2d-9824-40ce9d191c53",
+        "status": "processed",
+        "actions": {
+          "work_orders": [],
+          "citations": [
+            {
+              "id": "1eb76c13-f400-401c-ae72-beae30dd8f9d",
+              "event_id": "e5dc32de-03ec-4e2d-9824-40ce9d191c53",
+              "type": "litter_dumping",
+              "description": "Litter Dumping violation at 33.4485, -112.0741",
+              "fine_amount": 200.0,
+              "status": "issued",
+              "created_at": "2025-08-07T14:31:30.179013"
+            }
+          ],
+          "video_reviews": [],
+          "kpi_only": false
+        }
       }
     },
     {
       "test": "Ingest illegal_uturn Event",
-      "success": false,
-      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
-      "timestamp": "2025-08-07T14:30:31.214637",
+      "success": true,
+      "details": "Event 9acfbed4... \u2192 0 WO, 1 citations, 1 videos",
+      "timestamp": "2025-08-07T14:31:30.205711",
       "data": {
-        "raw_response": "Internal Server Error",
-        "status_code": 500
+        "event_id": "9acfbed4-b171-4304-80c4-0241a94e3ca0",
+        "status": "processed",
+        "actions": {
+          "work_orders": [],
+          "citations": [
+            {
+              "id": "f466e9c5-3eb8-4756-891c-49712557dfc4",
+              "event_id": "9acfbed4-b171-4304-80c4-0241a94e3ca0",
+              "type": "illegal_uturn",
+              "description": "Illegal Uturn violation at 33.4486, -112.0742",
+              "fine_amount": 150.0,
+              "status": "issued",
+              "created_at": "2025-08-07T14:31:30.201529"
+            }
+          ],
+          "video_reviews": [
+            {
+              "id": "428b2380-37f0-48ab-8548-33a8da823e1f",
+              "event_id": "9acfbed4-b171-4304-80c4-0241a94e3ca0",
+              "video_url": "https://aura-storage.s3.amazonaws.com/videos/9acfbed4-b171-4304-80c4-0241a94e3ca0_clip.mp4",
+              "thumbnail_url": "https://aura-storage.s3.amazonaws.com/thumbnails/9acfbed4-b171-4304-80c4-0241a94e3ca0_thumb.jpg",
+              "review_status": "queued",
+              "destination_agency": "pd",
+              "confidence_score": 0.78,
+              "reviewer_comments": "",
+              "created_at": "2025-08-07T14:31:30.202390",
+              "reviewed_at": null
+            }
+          ],
+          "kpi_only": false
+        }
       }
     },
     {
       "test": "Ingest speeding_school_zone Event",
-      "success": false,
-      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
-      "timestamp": "2025-08-07T14:30:31.236670",
+      "success": true,
+      "details": "Event 7cdc90bc... \u2192 0 WO, 1 citations, 1 videos",
+      "timestamp": "2025-08-07T14:31:30.228292",
       "data": {
-        "raw_response": "Internal Server Error",
-        "status_code": 500
+        "event_id": "7cdc90bc-167a-4ac5-a6f6-b2f953908423",
+        "status": "processed",
+        "actions": {
+          "work_orders": [],
+          "citations": [
+            {
+              "id": "e260881f-7063-4c99-9039-aef20c6d6a3c",
+              "event_id": "7cdc90bc-167a-4ac5-a6f6-b2f953908423",
+              "type": "speeding_school_zone",
+              "description": "Speeding School Zone violation at 33.4487, -112.0743",
+              "fine_amount": 250.0,
+              "status": "issued",
+              "created_at": "2025-08-07T14:31:30.223587"
+            }
+          ],
+          "video_reviews": [
+            {
+              "id": "afea8627-a3dd-4625-8f7e-a4dff22e749c",
+              "event_id": "7cdc90bc-167a-4ac5-a6f6-b2f953908423",
+              "video_url": "https://aura-storage.s3.amazonaws.com/videos/7cdc90bc-167a-4ac5-a6f6-b2f953908423_clip.mp4",
+              "thumbnail_url": "https://aura-storage.s3.amazonaws.com/thumbnails/7cdc90bc-167a-4ac5-a6f6-b2f953908423_thumb.jpg",
+              "review_status": "queued",
+              "destination_agency": "school_zone_unit",
+              "confidence_score": 0.95,
+              "reviewer_comments": "",
+              "created_at": "2025-08-07T14:31:30.224361",
+              "reviewed_at": null
+            }
+          ],
+          "kpi_only": false
+        }
       }
     },
     {
       "test": "KPIs Dashboard",
       "success": true,
-      "details": "Events today: 4, Open WOs: 1, Citations: 3, Fines: $600.0",
-      "timestamp": "2025-08-07T14:30:31.767015",
+      "details": "Events today: 8, Open WOs: 2, Citations: 6, Fines: $1200.0",
+      "timestamp": "2025-08-07T14:31:30.753993",
       "data": {
-        "events_today": 4,
-        "work_orders_open": 1,
+        "events_today": 8,
+        "work_orders_open": 2,
         "work_orders_closed": 0,
-        "citations_issued": 3,
+        "citations_issued": 6,
         "citations_paid": 0,
         "citations_contested": 0,
-        "total_fine_value": 600.0,
+        "total_fine_value": 1200.0,
         "avg_sla_hours": 48.0,
-        "grant_potential": 90.0,
-        "video_reviews_queued": 2,
+        "grant_potential": 180.0,
+        "video_reviews_queued": 4,
         "video_reviews_confirmed": 0,
         "dispute_rate": 0.0,
         "video_confirm_rate": 0.0,
@@ -148,57 +239,48 @@
     {
       "test": "Get Work Orders",
       "success": true,
-      "details": "Retrieved 1 work orders",
-      "timestamp": "2025-08-07T14:30:32.286193",
-      "data": {
-        "count": 1
-      }
-    },
-    {
-      "test": "Update Work Order",
-      "success": false,
-      "details": "Failed to update: {'detail': [{'type': 'missing', 'loc': ['query', 'status'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]}",
-      "timestamp": "2025-08-07T14:30:32.304608",
-      "data": {
-        "detail": [
-          {
-            "type": "missing",
-            "loc": [
-              "query",
-              "status"
-            ],
-            "msg": "Field required",
-            "input": null,
-            "url": "https://errors.pydantic.dev/2.5/v/missing"
-          }
-        ]
-      }
-    },
-    {
-      "test": "Get Citations",
-      "success": true,
-      "details": "Retrieved 3 citations",
-      "timestamp": "2025-08-07T14:30:32.823379",
-      "data": {
-        "count": 3
-      }
-    },
-    {
-      "test": "Get Video Reviews",
-      "success": true,
-      "details": "Retrieved 2 video reviews",
-      "timestamp": "2025-08-07T14:30:33.342296",
+      "details": "Retrieved 2 work orders",
+      "timestamp": "2025-08-07T14:31:31.273604",
       "data": {
         "count": 2
       }
     },
     {
-      "test": "Get Event Clusters",
-      "success": true,
-      "details": "Retrieved 0 event clusters",
-      "timestamp": "2025-08-07T14:30:33.885650",
+      "test": "Update Work Order",
+      "success": false,
+      "details": "Failed to update: {'raw_response': 'Internal Server Error', 'status_code': 500}",
+      "timestamp": "2025-08-07T14:31:31.294452",
       "data": {
-        "count": 0
+        "raw_response": "Internal Server Error",
+        "status_code": 500
+      }
+    },
+    {
+      "test": "Get Citations",
+      "success": true,
+      "details": "Retrieved 6 citations",
+      "timestamp": "2025-08-07T14:31:31.815053",
+      "data": {
+        "count": 6
+      }
+    },
+    {
+      "test": "Get Video Reviews",
+      "success": true,
+      "details": "Retrieved 4 video reviews",
+      "timestamp": "2025-08-07T14:31:32.335239",
+      "data": {
+        "count": 4
+      }
+    },
+    {
+      "test": "Get Event Clusters",
+      "success": false,
+      "details": "Failed to get clusters: {'raw_response': 'Internal Server Error', 'status_code': 500}",
+      "timestamp": "2025-08-07T14:31:32.879637",
+      "data": {
+        "raw_response": "Internal Server Error",
+        "status_code": 500
       }
     }
   ]
