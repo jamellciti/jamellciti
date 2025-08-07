@@ -1,26 +1,35 @@
+import React from 'react';
+import { View, Button, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
-import { useState } from 'react';
-import { Button, View } from 'react-native';
 
 export default function DebugLogin() {
-  const [clicked, setClicked] = useState(false);
-
   const fakeAuth = () => {
-    // Use the same token storage format as our auth system
-    localStorage.setItem('token', 'debug-jwt-token');
-    localStorage.setItem('token_exp', String(Date.now() + 86400 * 1000)); // 24 hours
+    console.log('🔍 DEBUG: fakeAuth invoked');
     
-    setClicked(true);
-    console.log('🔍 DEBUG: Fake token set, calling router.replace(/dashboard)');
+    // 1️⃣ Set fake token
+    localStorage.setItem('token', 'debug-token');
+    console.log('🔍 DEBUG: Token set');
+    
+    // 2️⃣ Replace route
     router.replace('/dashboard');
+    console.log('🔍 DEBUG: Called router.replace');
   };
 
   return (
-    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+    <View style={styles.container}>
       <Button 
-        title={clicked ? 'Clicked - Navigating...' : 'Debug Login'} 
-        onPress={fakeAuth}
+        title="DEBUG LOGIN" 
+        onPress={fakeAuth}  // correct prop is onPress
+        accessibilityLabel="debug-login-button"
       />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
