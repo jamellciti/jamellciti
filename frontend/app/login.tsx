@@ -117,6 +117,14 @@ export default function Login() {
               </TouchableOpacity>
             </View>
 
+            {/* Error Display */}
+            {error && (
+              <View style={styles.errorContainer}>
+                <MaterialIcons name="error" size={20} color="#FF6B6B" />
+                <Text style={styles.errorText}>{error}</Text>
+              </View>
+            )}
+
             {/* Login Button */}
             <TouchableOpacity
               style={[styles.loginButton, loading && styles.disabledButton]}
