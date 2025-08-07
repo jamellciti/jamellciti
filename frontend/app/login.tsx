@@ -76,10 +76,15 @@ export default function Login() {
   };
 
   const handleDemoLogin = async () => {
+    console.log('Demo login triggered');
     setEmail('admin@aura.vision');
     setPassword('demo123');
-    // Auto-trigger login with demo credentials
-    setTimeout(() => handleLogin(), 100);
+    
+    // Wait a moment for state to update, then trigger login
+    setTimeout(async () => {
+      console.log('Triggering handleLogin after state update');
+      await handleLogin();
+    }, 100);
   };
 
   return (
