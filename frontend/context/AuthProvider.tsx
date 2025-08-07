@@ -150,9 +150,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // 2️⃣ Logout function
+  // Logout function
   const logout = async (): Promise<void> => {
-    console.log('🚪 Logging out user...');
     await clearStoredToken();
     setAuthState({
       user: null,
@@ -161,7 +160,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       error: null,
     });
     router.replace('/login');
-    console.log('✅ Logout complete');
   };
 
   // Clear error function
