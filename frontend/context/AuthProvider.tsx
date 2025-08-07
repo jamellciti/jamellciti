@@ -50,6 +50,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     error: null,
   });
   
+  console.log('🛡️ AuthProvider render – authState:', authState);
+  
   const router = useRouter();
 
   // Token storage utilities
