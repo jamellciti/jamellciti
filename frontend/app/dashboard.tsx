@@ -41,15 +41,22 @@ interface EventData {
 export default function Dashboard() {
   const [kpis, setKpis] = useState<KPIData | null>(null);
   const [recentEvents, setRecentEvents] = useState<EventData[]>([]);
-  const [userInfo, setUserInfo] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const router = useRouter();
+  const { user, loading, logout } = useAuth();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!user && !loading) {
+      router.replace('/login');
+    }
+  }, [user, loading]);
 
   useEffect(() => {
-    loadUserInfo();
-    fetchDashboardData();
-  }, []);
+    if (user) {
+      fetchDashboardData();
+    }
+  }, [user]);
 
   const loadUserInfo = async () => {
     try {
