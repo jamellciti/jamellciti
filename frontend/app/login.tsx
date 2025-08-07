@@ -290,4 +290,19 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
   },
+  errorContainer: {
+    backgroundColor: '#2A0D0D',
+    borderRadius: 8,
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    borderWidth: 1,
+    borderColor: '#FF6B6B',
+  },
+  errorText: {
+    color: '#FF6B6B',
+    fontSize: 14,
+    flex: 1,
+  },
 });
