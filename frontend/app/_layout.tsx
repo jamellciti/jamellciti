@@ -46,12 +46,14 @@ const AppContent = () => {
 export default function RootLayout() {
   console.log('🗂️ Rendering RootLayout');
   return (
-    <SafeAreaProvider>
-      <AuthProvider>
-        {console.log('🗂️ Inside AuthProvider wrapper')}
-        <AppContent />
-      </AuthProvider>
-    </SafeAreaProvider>
+    <ErrorBoundary>
+      <SafeAreaProvider>
+        <AuthProvider>
+          {console.log('🗂️ Inside AuthProvider wrapper')}
+          <AppContent />
+        </AuthProvider>
+      </SafeAreaProvider>
+    </ErrorBoundary>
   );
 }
 
