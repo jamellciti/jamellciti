@@ -3,6 +3,7 @@ import { Stack, Redirect } from 'expo-router';
 import AuthProvider, { useAuth } from '../context/AuthProvider';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 // Loading component
 const LoadingScreen = () => (
