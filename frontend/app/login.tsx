@@ -50,10 +50,24 @@ export default function Login() {
 
       if (response.ok) {
         // Store auth token and user info
-        await AsyncStorage.setItem('auth_token', data.access_token);
-        await AsyncStorage.setItem('user_info', JSON.stringify(data.user));
+        console.log('Storing auth data...');
+        
+        try {
+          await AsyncStorage.setItem('auth_token', data.access_token);
+          await AsyncStorage.setItem('user_info', JSON.stringify(data.user));
+          console.log('Auth data stored successfully');
+        } catch (storageError) {
+          console.error('Storage error:', storageError);
+          // Fallback to localStorage for web
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('auth_token', data.access_token);
+            localStorage.setItem('user_info', JSON.stringify(data.user));
+            console.log('Using localStorage fallback');
+          }
+        }
 
         console.log('Login successful, user data:', data.user);
+        console.log('User consent level:', data.user.consent_level);
 
         // Check if user needs consent setup
         if (!data.user.consent_level || data.user.consent_level === 'none') {
