@@ -1,16 +1,16 @@
 {
   "summary": {
-    "passed": 1,
+    "passed": 10,
     "total": 11,
-    "success_rate": 9.1,
-    "timestamp": "2025-08-07T14:29:47.830488"
+    "success_rate": 90.9,
+    "timestamp": "2025-08-07T14:30:10.875421"
   },
   "detailed_results": [
     {
       "test": "API Health Check",
       "success": true,
       "details": "API Status: active",
-      "timestamp": "2025-08-07T14:29:42.288804",
+      "timestamp": "2025-08-07T14:30:04.988547",
       "data": {
         "message": "Aura Vision API",
         "status": "active",
@@ -19,16 +19,70 @@
     },
     {
       "test": "User Registration",
+      "success": true,
+      "details": "Created user admin@aura.vision",
+      "timestamp": "2025-08-07T14:30:05.564462",
+      "data": {
+        "message": "User created successfully",
+        "user_id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9"
+      }
+    },
+    {
+      "test": "User Authentication",
+      "success": true,
+      "details": "Successfully authenticated admin@aura.vision",
+      "timestamp": "2025-08-07T14:30:06.127942",
+      "data": {
+        "user_id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9",
+        "role": "admin"
+      }
+    },
+    {
+      "test": "Get Consent Status",
+      "success": true,
+      "details": "Current consent level: none",
+      "timestamp": "2025-08-07T14:30:06.649765",
+      "data": {
+        "level": "none",
+        "updated_at": "2025-08-07T14:30:05.546000",
+        "clip_ids_hash": []
+      }
+    },
+    {
+      "test": "Update Consent Level",
+      "success": true,
+      "details": "Updated consent to CIVIC (CoC: 0384cc169ae9...)",
+      "timestamp": "2025-08-07T14:30:06.685102",
+      "data": {
+        "message": "Consent level updated successfully",
+        "level": "civic",
+        "chain_of_custody": "0384cc169ae9903744163d0007819293362f7890208bd2c80cbfd77fb9c05ec9"
+      }
+    },
+    {
+      "test": "Subscription Status",
+      "success": true,
+      "details": "Subscription tier: aura_free, Active: True",
+      "timestamp": "2025-08-07T14:30:07.208286",
+      "data": {
+        "tier": "aura_free",
+        "active": true,
+        "current_period_end": null,
+        "stripe_subscription_id": null
+      }
+    },
+    {
+      "test": "Create API Key",
       "success": false,
-      "details": "Registration failed: {'detail': [{'type': 'missing', 'loc': ['query', 'email'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}, {'type': 'missing', 'loc': ['query', 'password'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]}",
-      "timestamp": "2025-08-07T14:29:42.808518",
+      "details": "Failed to create API key: {'detail': [{'type': 'missing', 'loc': ['query', 'name'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}, {'type': 'missing', 'loc': ['query', 'city'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]}",
+      "timestamp": "2025-08-07T14:30:07.727200",
       "data": {
         "detail": [
           {
             "type": "missing",
             "loc": [
               "query",
-              "email"
+              "name"
             ],
             "msg": "Field required",
             "input": null,
@@ -38,7 +92,7 @@
             "type": "missing",
             "loc": [
               "query",
-              "password"
+              "city"
             ],
             "msg": "Field required",
             "input": null,
@@ -48,69 +102,63 @@
       }
     },
     {
-      "test": "User Authentication",
-      "success": false,
-      "details": "Login failed: {'detail': 'Invalid credentials'}",
-      "timestamp": "2025-08-07T14:29:43.328978",
+      "test": "KPIs Dashboard",
+      "success": true,
+      "details": "Events today: 0, Open WOs: 0, Citations: 0, Fines: $0.0",
+      "timestamp": "2025-08-07T14:30:08.258458",
       "data": {
-        "detail": "Invalid credentials"
+        "events_today": 0,
+        "work_orders_open": 0,
+        "work_orders_closed": 0,
+        "citations_issued": 0,
+        "citations_paid": 0,
+        "citations_contested": 0,
+        "total_fine_value": 0.0,
+        "avg_sla_hours": 0.0,
+        "grant_potential": 0.0,
+        "video_reviews_queued": 0,
+        "video_reviews_confirmed": 0,
+        "dispute_rate": 0,
+        "video_confirm_rate": 0,
+        "avg_fine_value": 0,
+        "warnings_sent": 0
       }
     },
     {
-      "test": "Consent Workflow",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:43.829136",
-      "data": null
+      "test": "Get Work Orders",
+      "success": true,
+      "details": "Retrieved 0 work orders",
+      "timestamp": "2025-08-07T14:30:08.778418",
+      "data": {
+        "count": 0
+      }
     },
     {
-      "test": "Subscription Status",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:44.329278",
-      "data": null
+      "test": "Get Citations",
+      "success": true,
+      "details": "Retrieved 0 citations",
+      "timestamp": "2025-08-07T14:30:09.303143",
+      "data": {
+        "count": 0
+      }
     },
     {
-      "test": "Event Ingestion",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:44.829411",
-      "data": null
+      "test": "Get Video Reviews",
+      "success": true,
+      "details": "Retrieved 0 video reviews",
+      "timestamp": "2025-08-07T14:30:09.824662",
+      "data": {
+        "count": 0
+      }
     },
     {
-      "test": "KPIs Dashboard",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:45.329544",
-      "data": null
-    },
-    {
-      "test": "Work Orders",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:45.829676",
-      "data": null
-    },
-    {
-      "test": "Citations",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:46.329809",
-      "data": null
-    },
-    {
-      "test": "Video Reviews",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:46.829944",
-      "data": null
-    },
-    {
-      "test": "Event Clusters",
-      "success": false,
-      "details": "No auth token available",
-      "timestamp": "2025-08-07T14:29:47.330089",
-      "data": null
+      "test": "Get Event Clusters",
+      "success": true,
+      "details": "Retrieved 0 event clusters",
+      "timestamp": "2025-08-07T14:30:10.375066",
+      "data": {
+        "count": 0
+      }
     }
   ]
 }
