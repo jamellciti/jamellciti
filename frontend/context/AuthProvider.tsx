@@ -172,15 +172,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log('🎯 Login complete - navigating based on consent level:', userData.consent_level);
 
       // Step 5: Navigate based on user state  
-      // Use queueMicrotask to ensure navigation happens after state update
+      // Use queueMicrotask to ensure navigation happens after state update (Expo Router v2 fix)
       queueMicrotask(() => {
+        console.log('🔄 queueMicrotask: About to navigate...');
         if (!userData.consent_level || userData.consent_level === 'none') {
-          console.log('🔄 Navigating to consent wizard');
+          console.log('🔄 queueMicrotask: Navigating to consent wizard');
           router.replace('/consent-wizard');
         } else {
-          console.log('🔄 Navigating to dashboard');
+          console.log('🔄 queueMicrotask: Navigating to dashboard');
           router.replace('/dashboard');
         }
+        console.log('🔄 queueMicrotask: Navigation call completed');
       });
 
     } catch (err: any) {
