@@ -2,8 +2,16 @@ import json
 import logging
 from typing import List
 from fastapi import WebSocket
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
+
+class DateTimeEncoder(json.JSONEncoder):
+    """Custom JSON encoder that handles datetime objects"""
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
 
 class ConnectionManager:
     def __init__(self):
