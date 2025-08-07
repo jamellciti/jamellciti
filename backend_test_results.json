@@ -3,14 +3,14 @@
     "passed": 10,
     "total": 11,
     "success_rate": 90.9,
-    "timestamp": "2025-08-07T14:30:10.875421"
+    "timestamp": "2025-08-07T14:30:34.386018"
   },
   "detailed_results": [
     {
       "test": "API Health Check",
       "success": true,
       "details": "API Status: active",
-      "timestamp": "2025-08-07T14:30:04.988547",
+      "timestamp": "2025-08-07T14:30:28.391877",
       "data": {
         "message": "Aura Vision API",
         "status": "active",
@@ -20,18 +20,17 @@
     {
       "test": "User Registration",
       "success": true,
-      "details": "Created user admin@aura.vision",
-      "timestamp": "2025-08-07T14:30:05.564462",
+      "details": "Demo user admin@aura.vision already exists (expected)",
+      "timestamp": "2025-08-07T14:30:28.910262",
       "data": {
-        "message": "User created successfully",
-        "user_id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9"
+        "detail": "User already exists"
       }
     },
     {
       "test": "User Authentication",
       "success": true,
       "details": "Successfully authenticated admin@aura.vision",
-      "timestamp": "2025-08-07T14:30:06.127942",
+      "timestamp": "2025-08-07T14:30:29.477285",
       "data": {
         "user_id": "56474f35-ca7d-4335-b6c2-7eabf611c3c9",
         "role": "admin"
@@ -40,30 +39,30 @@
     {
       "test": "Get Consent Status",
       "success": true,
-      "details": "Current consent level: none",
-      "timestamp": "2025-08-07T14:30:06.649765",
+      "details": "Current consent level: civic",
+      "timestamp": "2025-08-07T14:30:30.006802",
       "data": {
-        "level": "none",
-        "updated_at": "2025-08-07T14:30:05.546000",
+        "level": "civic",
+        "updated_at": "2025-08-07T14:30:06.666000",
         "clip_ids_hash": []
       }
     },
     {
       "test": "Update Consent Level",
       "success": true,
-      "details": "Updated consent to CIVIC (CoC: 0384cc169ae9...)",
-      "timestamp": "2025-08-07T14:30:06.685102",
+      "details": "Updated consent to CIVIC (CoC: a224c2f5dcd4...)",
+      "timestamp": "2025-08-07T14:30:30.032173",
       "data": {
         "message": "Consent level updated successfully",
         "level": "civic",
-        "chain_of_custody": "0384cc169ae9903744163d0007819293362f7890208bd2c80cbfd77fb9c05ec9"
+        "chain_of_custody": "a224c2f5dcd4468b4d5b4e3fc5be3d6e120d1e9342e2158d6459e25bc3a6d191"
       }
     },
     {
       "test": "Subscription Status",
       "success": true,
       "details": "Subscription tier: aura_free, Active: True",
-      "timestamp": "2025-08-07T14:30:07.208286",
+      "timestamp": "2025-08-07T14:30:30.553352",
       "data": {
         "tier": "aura_free",
         "active": true,
@@ -73,26 +72,100 @@
     },
     {
       "test": "Create API Key",
+      "success": true,
+      "details": "Created API key: aura_fef3133...",
+      "timestamp": "2025-08-07T14:30:31.084566",
+      "data": {
+        "api_key": "aura_fef31337c0fe",
+        "name": "test-device-key",
+        "city": "phoenix",
+        "created_at": "2025-08-07T14:30:31.067622"
+      }
+    },
+    {
+      "test": "Ingest pothole Event",
       "success": false,
-      "details": "Failed to create API key: {'detail': [{'type': 'missing', 'loc': ['query', 'name'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}, {'type': 'missing', 'loc': ['query', 'city'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]}",
-      "timestamp": "2025-08-07T14:30:07.727200",
+      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
+      "timestamp": "2025-08-07T14:30:31.143862",
+      "data": {
+        "raw_response": "Internal Server Error",
+        "status_code": 500
+      }
+    },
+    {
+      "test": "Ingest litter_dumping Event",
+      "success": false,
+      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
+      "timestamp": "2025-08-07T14:30:31.178275",
+      "data": {
+        "raw_response": "Internal Server Error",
+        "status_code": 500
+      }
+    },
+    {
+      "test": "Ingest illegal_uturn Event",
+      "success": false,
+      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
+      "timestamp": "2025-08-07T14:30:31.214637",
+      "data": {
+        "raw_response": "Internal Server Error",
+        "status_code": 500
+      }
+    },
+    {
+      "test": "Ingest speeding_school_zone Event",
+      "success": false,
+      "details": "Failed to ingest event: {'raw_response': 'Internal Server Error', 'status_code': 500}",
+      "timestamp": "2025-08-07T14:30:31.236670",
+      "data": {
+        "raw_response": "Internal Server Error",
+        "status_code": 500
+      }
+    },
+    {
+      "test": "KPIs Dashboard",
+      "success": true,
+      "details": "Events today: 4, Open WOs: 1, Citations: 3, Fines: $600.0",
+      "timestamp": "2025-08-07T14:30:31.767015",
+      "data": {
+        "events_today": 4,
+        "work_orders_open": 1,
+        "work_orders_closed": 0,
+        "citations_issued": 3,
+        "citations_paid": 0,
+        "citations_contested": 0,
+        "total_fine_value": 600.0,
+        "avg_sla_hours": 48.0,
+        "grant_potential": 90.0,
+        "video_reviews_queued": 2,
+        "video_reviews_confirmed": 0,
+        "dispute_rate": 0.0,
+        "video_confirm_rate": 0.0,
+        "avg_fine_value": 200.0,
+        "warnings_sent": 0
+      }
+    },
+    {
+      "test": "Get Work Orders",
+      "success": true,
+      "details": "Retrieved 1 work orders",
+      "timestamp": "2025-08-07T14:30:32.286193",
+      "data": {
+        "count": 1
+      }
+    },
+    {
+      "test": "Update Work Order",
+      "success": false,
+      "details": "Failed to update: {'detail': [{'type': 'missing', 'loc': ['query', 'status'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]}",
+      "timestamp": "2025-08-07T14:30:32.304608",
       "data": {
         "detail": [
           {
             "type": "missing",
             "loc": [
               "query",
-              "name"
-            ],
-            "msg": "Field required",
-            "input": null,
-            "url": "https://errors.pydantic.dev/2.5/v/missing"
-          },
-          {
-            "type": "missing",
-            "loc": [
-              "query",
-              "city"
+              "status"
             ],
             "msg": "Field required",
             "input": null,
@@ -102,60 +175,28 @@
       }
     },
     {
-      "test": "KPIs Dashboard",
-      "success": true,
-      "details": "Events today: 0, Open WOs: 0, Citations: 0, Fines: $0.0",
-      "timestamp": "2025-08-07T14:30:08.258458",
-      "data": {
-        "events_today": 0,
-        "work_orders_open": 0,
-        "work_orders_closed": 0,
-        "citations_issued": 0,
-        "citations_paid": 0,
-        "citations_contested": 0,
-        "total_fine_value": 0.0,
-        "avg_sla_hours": 0.0,
-        "grant_potential": 0.0,
-        "video_reviews_queued": 0,
-        "video_reviews_confirmed": 0,
-        "dispute_rate": 0,
-        "video_confirm_rate": 0,
-        "avg_fine_value": 0,
-        "warnings_sent": 0
-      }
-    },
-    {
-      "test": "Get Work Orders",
-      "success": true,
-      "details": "Retrieved 0 work orders",
-      "timestamp": "2025-08-07T14:30:08.778418",
-      "data": {
-        "count": 0
-      }
-    },
-    {
       "test": "Get Citations",
       "success": true,
-      "details": "Retrieved 0 citations",
-      "timestamp": "2025-08-07T14:30:09.303143",
+      "details": "Retrieved 3 citations",
+      "timestamp": "2025-08-07T14:30:32.823379",
       "data": {
-        "count": 0
+        "count": 3
       }
     },
     {
       "test": "Get Video Reviews",
       "success": true,
-      "details": "Retrieved 0 video reviews",
-      "timestamp": "2025-08-07T14:30:09.824662",
+      "details": "Retrieved 2 video reviews",
+      "timestamp": "2025-08-07T14:30:33.342296",
       "data": {
-        "count": 0
+        "count": 2
       }
     },
     {
       "test": "Get Event Clusters",
       "success": true,
       "details": "Retrieved 0 event clusters",
-      "timestamp": "2025-08-07T14:30:10.375066",
+      "timestamp": "2025-08-07T14:30:33.885650",
       "data": {
         "count": 0
       }
