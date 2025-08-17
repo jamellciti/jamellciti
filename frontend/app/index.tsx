@@ -393,6 +393,12 @@ export default function Index() {
         
         <View style={styles.headerRight}>
           <TouchableOpacity 
+            style={styles.helpButton}
+            onPress={() => router.push('/help')}
+          >
+            <Ionicons name="help-circle" size={20} color={colors.text} />
+          </TouchableOpacity>
+          <TouchableOpacity 
             style={styles.profileButton}
             onPress={() => router.push('/profile')}
           >
