@@ -135,43 +135,133 @@ async def initialize_default_symbols():
         {"name": "Help", "category": "emergency", "emoji": "🆘", "description": "I need help", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I need help!", "is_emergency": True},
         {"name": "Bathroom", "category": "emergency", "emoji": "🚽", "description": "I need to use the bathroom", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I need to use the bathroom", "is_emergency": True},
         {"name": "Pain", "category": "emergency", "emoji": "😣", "description": "I am hurt or in pain", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am hurt", "is_emergency": True},
+        {"name": "Stop", "category": "emergency", "emoji": "🛑", "description": "Stop, I don't like this", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Stop please", "is_emergency": True},
         
         # Basic needs
         {"name": "Water", "category": "basic_needs", "emoji": "💧", "description": "I want water", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want water", "is_emergency": False},
         {"name": "Food", "category": "basic_needs", "emoji": "🍎", "description": "I am hungry", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am hungry", "is_emergency": False},
         {"name": "Sleep", "category": "basic_needs", "emoji": "😴", "description": "I am tired", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am tired", "is_emergency": False},
+        {"name": "Break", "category": "basic_needs", "emoji": "⏸️", "description": "I need a break", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I need a break", "is_emergency": False},
+        {"name": "Quiet", "category": "basic_needs", "emoji": "🤫", "description": "I need quiet", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I need quiet", "is_emergency": False},
         
-        # Emotions
+        # Emotions - expanded
         {"name": "Happy", "category": "emotions", "emoji": "😊", "description": "I am happy", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am happy", "is_emergency": False},
         {"name": "Sad", "category": "emotions", "emoji": "😢", "description": "I am sad", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am sad", "is_emergency": False},
         {"name": "Mad", "category": "emotions", "emoji": "😡", "description": "I am angry", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am angry", "is_emergency": False},
         {"name": "Scared", "category": "emotions", "emoji": "😰", "description": "I am scared", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am scared", "is_emergency": False},
+        {"name": "Excited", "category": "emotions", "emoji": "🤩", "description": "I am excited", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I am excited", "is_emergency": False},
+        {"name": "Calm", "category": "emotions", "emoji": "😌", "description": "I am calm", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I am calm", "is_emergency": False},
+        {"name": "Frustrated", "category": "emotions", "emoji": "😤", "description": "I am frustrated", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I am frustrated", "is_emergency": False},
+        {"name": "Proud", "category": "emotions", "emoji": "😊", "description": "I am proud", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I am proud", "is_emergency": False},
         
-        # Actions
+        # Actions - expanded
         {"name": "Please", "category": "actions", "emoji": "🙏", "description": "Please", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Please", "is_emergency": False},
         {"name": "Thank You", "category": "actions", "emoji": "👍", "description": "Thank you", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Thank you", "is_emergency": False},
         {"name": "Yes", "category": "actions", "emoji": "✅", "description": "Yes", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Yes", "is_emergency": False},
         {"name": "No", "category": "actions", "emoji": "❌", "description": "No", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "No", "is_emergency": False},
+        {"name": "More", "category": "actions", "emoji": "➕", "description": "I want more", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "More please", "is_emergency": False},
+        {"name": "All Done", "category": "actions", "emoji": "✔️", "description": "I am finished", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "All done", "is_emergency": False},
+        {"name": "Wait", "category": "actions", "emoji": "⏳", "description": "Please wait", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Please wait", "is_emergency": False},
+        {"name": "Go", "category": "actions", "emoji": "🚶", "description": "Let's go", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Let's go", "is_emergency": False},
         
-        # Family
+        # Family - expanded
         {"name": "Mom", "category": "family", "emoji": "👩", "description": "Mom or mother", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Mom", "is_emergency": False},
         {"name": "Dad", "category": "family", "emoji": "👨", "description": "Dad or father", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Dad", "is_emergency": False},
         {"name": "Family", "category": "family", "emoji": "👨‍👩‍👧‍👦", "description": "Family", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Family", "is_emergency": False},
+        {"name": "Sister", "category": "family", "emoji": "👧", "description": "Sister", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Sister", "is_emergency": False},
+        {"name": "Brother", "category": "family", "emoji": "👦", "description": "Brother", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Brother", "is_emergency": False},
+        {"name": "Grandma", "category": "family", "emoji": "👵", "description": "Grandmother", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Grandma", "is_emergency": False},
+        {"name": "Grandpa", "category": "family", "emoji": "👴", "description": "Grandfather", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Grandpa", "is_emergency": False},
         
-        # Food
+        # Food - greatly expanded
         {"name": "Apple", "category": "food", "emoji": "🍎", "description": "Apple fruit", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Apple", "is_emergency": False},
         {"name": "Milk", "category": "food", "emoji": "🥛", "description": "Milk", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Milk", "is_emergency": False},
         {"name": "Bread", "category": "food", "emoji": "🍞", "description": "Bread", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Bread", "is_emergency": False},
+        {"name": "Pizza", "category": "food", "emoji": "🍕", "description": "Pizza", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Pizza", "is_emergency": False},
+        {"name": "Cookie", "category": "food", "emoji": "🍪", "description": "Cookie", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Cookie", "is_emergency": False},
+        {"name": "Banana", "category": "food", "emoji": "🍌", "description": "Banana", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Banana", "is_emergency": False},
+        {"name": "Sandwich", "category": "food", "emoji": "🥪", "description": "Sandwich", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Sandwich", "is_emergency": False},
+        {"name": "Ice Cream", "category": "food", "emoji": "🍦", "description": "Ice cream", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Ice cream", "is_emergency": False},
         
-        # Activities
+        # Activities - expanded
         {"name": "Play", "category": "activities", "emoji": "🎯", "description": "I want to play", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want to play", "is_emergency": False},
         {"name": "Book", "category": "activities", "emoji": "📖", "description": "I want to read", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want to read", "is_emergency": False},
         {"name": "Music", "category": "activities", "emoji": "🎵", "description": "I want music", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I want music", "is_emergency": False},
+        {"name": "TV", "category": "activities", "emoji": "📺", "description": "I want to watch TV", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want to watch TV", "is_emergency": False},
+        {"name": "Game", "category": "activities", "emoji": "🎮", "description": "I want to play games", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want to play games", "is_emergency": False},
+        {"name": "Draw", "category": "activities", "emoji": "🖍️", "description": "I want to draw", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want to draw", "is_emergency": False},
+        {"name": "Outside", "category": "activities", "emoji": "🌳", "description": "I want to go outside", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want to go outside", "is_emergency": False},
         
-        # Social
+        # Social - expanded
         {"name": "Hi", "category": "social", "emoji": "👋", "description": "Hello or hi", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Hi", "is_emergency": False},
         {"name": "Bye", "category": "social", "emoji": "👋", "description": "Goodbye", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Bye", "is_emergency": False},
         {"name": "Friend", "category": "social", "emoji": "👫", "description": "Friend", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Friend", "is_emergency": False},
+        {"name": "Share", "category": "social", "emoji": "🤝", "description": "I want to share", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I want to share", "is_emergency": False},
+        {"name": "Turn", "category": "social", "emoji": "🔄", "description": "My turn", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "My turn", "is_emergency": False},
+        {"name": "Sorry", "category": "social", "emoji": "😞", "description": "I am sorry", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I am sorry", "is_emergency": False},
+        
+        # School - expanded
+        {"name": "School", "category": "school", "emoji": "🏫", "description": "School", "difficulty_level": 1, "age_groups": ["school_age", "teen_adult"], "tts_text": "School", "is_emergency": False},
+        {"name": "Teacher", "category": "school", "emoji": "👩‍🏫", "description": "Teacher", "difficulty_level": 1, "age_groups": ["school_age", "teen_adult"], "tts_text": "Teacher", "is_emergency": False},
+        {"name": "Homework", "category": "school", "emoji": "📝", "description": "Homework", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Homework", "is_emergency": False},
+        {"name": "Question", "category": "school", "emoji": "❓", "description": "I have a question", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I have a question", "is_emergency": False},
+        {"name": "Finished", "category": "school", "emoji": "✅", "description": "I am finished", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "I am finished", "is_emergency": False},
+        
+        # New Categories
+        
+        # Body Parts
+        {"name": "Head", "category": "body_parts", "emoji": "🗣️", "description": "My head", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "My head", "is_emergency": False},
+        {"name": "Hands", "category": "body_parts", "emoji": "🙌", "description": "My hands", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "My hands", "is_emergency": False},
+        {"name": "Feet", "category": "body_parts", "emoji": "🦶", "description": "My feet", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "My feet", "is_emergency": False},
+        {"name": "Stomach", "category": "body_parts", "emoji": "🤱", "description": "My stomach", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "My stomach", "is_emergency": False},
+        
+        # Places
+        {"name": "Home", "category": "places", "emoji": "🏠", "description": "Home", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Home", "is_emergency": False},
+        {"name": "Park", "category": "places", "emoji": "🌳", "description": "Park", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Park", "is_emergency": False},
+        {"name": "Store", "category": "places", "emoji": "🏪", "description": "Store", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Store", "is_emergency": False},
+        {"name": "Hospital", "category": "places", "emoji": "🏥", "description": "Hospital", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Hospital", "is_emergency": False},
+        
+        # Transport
+        {"name": "Car", "category": "transport", "emoji": "🚗", "description": "Car", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Car", "is_emergency": False},
+        {"name": "Bus", "category": "transport", "emoji": "🚌", "description": "Bus", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Bus", "is_emergency": False},
+        {"name": "Bike", "category": "transport", "emoji": "🚲", "description": "Bicycle", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Bicycle", "is_emergency": False},
+        
+        # Weather
+        {"name": "Sun", "category": "weather", "emoji": "☀️", "description": "Sunny", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "It's sunny", "is_emergency": False},
+        {"name": "Rain", "category": "weather", "emoji": "🌧️", "description": "Raining", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "It's raining", "is_emergency": False},
+        {"name": "Cold", "category": "weather", "emoji": "🥶", "description": "Cold", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "It's cold", "is_emergency": False},
+        {"name": "Hot", "category": "weather", "emoji": "🥵", "description": "Hot", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "It's hot", "is_emergency": False},
+        
+        # Colors
+        {"name": "Red", "category": "colors", "emoji": "🔴", "description": "Red color", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Red", "is_emergency": False},
+        {"name": "Blue", "category": "colors", "emoji": "🔵", "description": "Blue color", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Blue", "is_emergency": False},
+        {"name": "Green", "category": "colors", "emoji": "🟢", "description": "Green color", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Green", "is_emergency": False},
+        {"name": "Yellow", "category": "colors", "emoji": "🟡", "description": "Yellow color", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Yellow", "is_emergency": False},
+        
+        # Numbers
+        {"name": "One", "category": "numbers", "emoji": "1️⃣", "description": "Number one", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "One", "is_emergency": False},
+        {"name": "Two", "category": "numbers", "emoji": "2️⃣", "description": "Number two", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Two", "is_emergency": False},
+        {"name": "Three", "category": "numbers", "emoji": "3️⃣", "description": "Number three", "difficulty_level": 2, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Three", "is_emergency": False},
+        
+        # Animals
+        {"name": "Dog", "category": "animals", "emoji": "🐕", "description": "Dog", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Dog", "is_emergency": False},
+        {"name": "Cat", "category": "animals", "emoji": "🐱", "description": "Cat", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Cat", "is_emergency": False},
+        {"name": "Bird", "category": "animals", "emoji": "🐦", "description": "Bird", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "Bird", "is_emergency": False},
+        
+        # Time
+        {"name": "Now", "category": "time", "emoji": "⏰", "description": "Right now", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Now", "is_emergency": False},
+        {"name": "Later", "category": "time", "emoji": "⏳", "description": "Later", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Later", "is_emergency": False},
+        {"name": "Today", "category": "time", "emoji": "📅", "description": "Today", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Today", "is_emergency": False},
+        
+        # Medical
+        {"name": "Medicine", "category": "medical", "emoji": "💊", "description": "Medicine", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Medicine", "is_emergency": False},
+        {"name": "Doctor", "category": "medical", "emoji": "👩‍⚕️", "description": "Doctor", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Doctor", "is_emergency": False},
+        {"name": "Sick", "category": "medical", "emoji": "🤒", "description": "I feel sick", "difficulty_level": 1, "age_groups": ["early_childhood", "school_age", "teen_adult"], "tts_text": "I feel sick", "is_emergency": False},
+        
+        # Technology
+        {"name": "Phone", "category": "technology", "emoji": "📱", "description": "Phone", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Phone", "is_emergency": False},
+        {"name": "Computer", "category": "technology", "emoji": "💻", "description": "Computer", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Computer", "is_emergency": False},
+        {"name": "Tablet", "category": "technology", "emoji": "📱", "description": "Tablet", "difficulty_level": 2, "age_groups": ["school_age", "teen_adult"], "tts_text": "Tablet", "is_emergency": False},
     ]
     
     # Insert symbols
