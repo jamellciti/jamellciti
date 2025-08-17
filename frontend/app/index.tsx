@@ -179,16 +179,64 @@ export default function Index() {
     }
   };
 
-  // Offline fallback symbols
+  // Offline fallback symbols - expanded with more categories
   const getOfflineSymbols = (): Symbol[] => [
+    // Emergency
     { id: '1', name: 'Help', category: 'emergency', emoji: '🆘', description: 'I need help', difficulty_level: 1, tts_text: 'I need help!', is_emergency: true },
-    { id: '2', name: 'Water', category: 'basic_needs', emoji: '💧', description: 'I want water', difficulty_level: 1, tts_text: 'I want water', is_emergency: false },
-    { id: '3', name: 'Happy', category: 'emotions', emoji: '😊', description: 'I am happy', difficulty_level: 1, tts_text: 'I am happy', is_emergency: false },
-    { id: '4', name: 'Yes', category: 'actions', emoji: '✅', description: 'Yes', difficulty_level: 1, tts_text: 'Yes', is_emergency: false },
-    { id: '5', name: 'No', category: 'actions', emoji: '❌', description: 'No', difficulty_level: 1, tts_text: 'No', is_emergency: false },
-    { id: '6', name: 'Mom', category: 'family', emoji: '👩', description: 'Mom', difficulty_level: 1, tts_text: 'Mom', is_emergency: false },
-    { id: '7', name: 'Hi', category: 'social', emoji: '👋', description: 'Hello', difficulty_level: 1, tts_text: 'Hi', is_emergency: false },
-    { id: '8', name: 'Play', category: 'activities', emoji: '🎯', description: 'I want to play', difficulty_level: 1, tts_text: 'I want to play', is_emergency: false }
+    { id: '2', name: 'Bathroom', category: 'emergency', emoji: '🚽', description: 'I need to use the bathroom', difficulty_level: 1, tts_text: 'I need to use the bathroom', is_emergency: true },
+    { id: '3', name: 'Stop', category: 'emergency', emoji: '🛑', description: 'Stop please', difficulty_level: 1, tts_text: 'Stop please', is_emergency: true },
+    
+    // Basic needs
+    { id: '4', name: 'Water', category: 'basic_needs', emoji: '💧', description: 'I want water', difficulty_level: 1, tts_text: 'I want water', is_emergency: false },
+    { id: '5', name: 'Food', category: 'basic_needs', emoji: '🍎', description: 'I am hungry', difficulty_level: 1, tts_text: 'I am hungry', is_emergency: false },
+    { id: '6', name: 'Sleep', category: 'basic_needs', emoji: '😴', description: 'I am tired', difficulty_level: 1, tts_text: 'I am tired', is_emergency: false },
+    { id: '7', name: 'Quiet', category: 'basic_needs', emoji: '🤫', description: 'I need quiet', difficulty_level: 1, tts_text: 'I need quiet', is_emergency: false },
+    
+    // Emotions
+    { id: '8', name: 'Happy', category: 'emotions', emoji: '😊', description: 'I am happy', difficulty_level: 1, tts_text: 'I am happy', is_emergency: false },
+    { id: '9', name: 'Sad', category: 'emotions', emoji: '😢', description: 'I am sad', difficulty_level: 1, tts_text: 'I am sad', is_emergency: false },
+    { id: '10', name: 'Mad', category: 'emotions', emoji: '😡', description: 'I am angry', difficulty_level: 1, tts_text: 'I am angry', is_emergency: false },
+    { id: '11', name: 'Scared', category: 'emotions', emoji: '😰', description: 'I am scared', difficulty_level: 1, tts_text: 'I am scared', is_emergency: false },
+    
+    // Actions
+    { id: '12', name: 'Yes', category: 'actions', emoji: '✅', description: 'Yes', difficulty_level: 1, tts_text: 'Yes', is_emergency: false },
+    { id: '13', name: 'No', category: 'actions', emoji: '❌', description: 'No', difficulty_level: 1, tts_text: 'No', is_emergency: false },
+    { id: '14', name: 'Please', category: 'actions', emoji: '🙏', description: 'Please', difficulty_level: 1, tts_text: 'Please', is_emergency: false },
+    { id: '15', name: 'Thank You', category: 'actions', emoji: '👍', description: 'Thank you', difficulty_level: 1, tts_text: 'Thank you', is_emergency: false },
+    { id: '16', name: 'More', category: 'actions', emoji: '➕', description: 'I want more', difficulty_level: 1, tts_text: 'More please', is_emergency: false },
+    { id: '17', name: 'All Done', category: 'actions', emoji: '✔️', description: 'I am finished', difficulty_level: 1, tts_text: 'All done', is_emergency: false },
+    
+    // Family
+    { id: '18', name: 'Mom', category: 'family', emoji: '👩', description: 'Mom', difficulty_level: 1, tts_text: 'Mom', is_emergency: false },
+    { id: '19', name: 'Dad', category: 'family', emoji: '👨', description: 'Dad', difficulty_level: 1, tts_text: 'Dad', is_emergency: false },
+    { id: '20', name: 'Family', category: 'family', emoji: '👨‍👩‍👧‍👦', description: 'Family', difficulty_level: 1, tts_text: 'Family', is_emergency: false },
+    
+    // Social
+    { id: '21', name: 'Hi', category: 'social', emoji: '👋', description: 'Hello', difficulty_level: 1, tts_text: 'Hi', is_emergency: false },
+    { id: '22', name: 'Bye', category: 'social', emoji: '👋', description: 'Goodbye', difficulty_level: 1, tts_text: 'Bye', is_emergency: false },
+    { id: '23', name: 'Share', category: 'social', emoji: '🤝', description: 'I want to share', difficulty_level: 1, tts_text: 'I want to share', is_emergency: false },
+    
+    // Activities
+    { id: '24', name: 'Play', category: 'activities', emoji: '🎯', description: 'I want to play', difficulty_level: 1, tts_text: 'I want to play', is_emergency: false },
+    { id: '25', name: 'Book', category: 'activities', emoji: '📖', description: 'I want to read', difficulty_level: 1, tts_text: 'I want to read', is_emergency: false },
+    { id: '26', name: 'TV', category: 'activities', emoji: '📺', description: 'I want to watch TV', difficulty_level: 1, tts_text: 'I want to watch TV', is_emergency: false },
+    
+    // Food
+    { id: '27', name: 'Apple', category: 'food', emoji: '🍎', description: 'Apple', difficulty_level: 1, tts_text: 'Apple', is_emergency: false },
+    { id: '28', name: 'Milk', category: 'food', emoji: '🥛', description: 'Milk', difficulty_level: 1, tts_text: 'Milk', is_emergency: false },
+    { id: '29', name: 'Cookie', category: 'food', emoji: '🍪', description: 'Cookie', difficulty_level: 1, tts_text: 'Cookie', is_emergency: false },
+    
+    // Places
+    { id: '30', name: 'Home', category: 'places', emoji: '🏠', description: 'Home', difficulty_level: 1, tts_text: 'Home', is_emergency: false },
+    { id: '31', name: 'Park', category: 'places', emoji: '🌳', description: 'Park', difficulty_level: 1, tts_text: 'Park', is_emergency: false },
+    
+    // Animals
+    { id: '32', name: 'Dog', category: 'animals', emoji: '🐕', description: 'Dog', difficulty_level: 1, tts_text: 'Dog', is_emergency: false },
+    { id: '33', name: 'Cat', category: 'animals', emoji: '🐱', description: 'Cat', difficulty_level: 1, tts_text: 'Cat', is_emergency: false },
+    
+    // Colors
+    { id: '34', name: 'Red', category: 'colors', emoji: '🔴', description: 'Red color', difficulty_level: 1, tts_text: 'Red', is_emergency: false },
+    { id: '35', name: 'Blue', category: 'colors', emoji: '🔵', description: 'Blue color', difficulty_level: 1, tts_text: 'Blue', is_emergency: false },
   ];
 
   const getOfflineEmergencySymbols = (): Symbol[] => [
