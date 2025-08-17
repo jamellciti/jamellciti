@@ -256,10 +256,16 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Main AAC Interface Rendering"
+    - "Mobile Responsiveness and Touch Targets"
+    - "Symbol Selection and TTS Functionality"
+    - "Category Navigation and Filtering"
+    - "Emergency Bar Functionality"
+    - "Backend Integration and Data Loading"
   stuck_tasks: []
-  test_all: true
-  test_priority: "completed"
+  test_all: false
+  test_priority: "high_first"
 
 frontend:
   - task: "Main AAC Interface Rendering"
