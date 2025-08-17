@@ -553,6 +553,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  helpButton: {
+    padding: 8,
+    marginRight: 4,
+  },
   profileButton: {
     padding: 8,
     marginRight: 8,
