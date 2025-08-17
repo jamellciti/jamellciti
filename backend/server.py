@@ -42,6 +42,16 @@ class SymbolCategory(str, Enum):
     ACTIVITIES = "activities"
     SCHOOL = "school"
     TIME = "time"
+    BODY_PARTS = "body_parts"
+    PLACES = "places"
+    TRANSPORT = "transport"
+    WEATHER = "weather"
+    COLORS = "colors"
+    NUMBERS = "numbers"
+    ANIMALS = "animals"
+    CLOTHING = "clothing"
+    MEDICAL = "medical"
+    TECHNOLOGY = "technology"
 
 class DifficultyLevel(int, Enum):
     BEGINNER = 1
