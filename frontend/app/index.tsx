@@ -190,6 +190,9 @@ export default function Index() {
     const newSelection = [...selectedSymbols, symbol];
     setSelectedSymbols(newSelection);
     
+    // Haptic feedback for touch confirmation
+    Vibration.vibrate(50);
+    
     // Immediate TTS feedback
     await Speech.speak(symbol.tts_text, {
       rate: 0.8,
