@@ -485,6 +485,12 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     alignItems: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileButton: {
+    padding: 8,
+    marginRight: 8,
   },
   userName: {
     fontSize: 14,
