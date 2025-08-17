@@ -69,7 +69,7 @@ export default function Index() {
   const [showEmergencyBar, setShowEmergencyBar] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Categories for navigation
+  // Categories for navigation - greatly expanded
   const categories = [
     { id: 'all', name: 'All', icon: 'apps' },
     { id: 'basic_needs', name: 'Needs', icon: 'water' },
@@ -78,7 +78,18 @@ export default function Index() {
     { id: 'food', name: 'Food', icon: 'restaurant' },
     { id: 'family', name: 'Family', icon: 'people' },
     { id: 'social', name: 'Social', icon: 'chatbubbles' },
-    { id: 'activities', name: 'Play', icon: 'game-controller' }
+    { id: 'activities', name: 'Play', icon: 'game-controller' },
+    { id: 'school', name: 'School', icon: 'library' },
+    { id: 'body_parts', name: 'Body', icon: 'body' },
+    { id: 'places', name: 'Places', icon: 'location' },
+    { id: 'transport', name: 'Travel', icon: 'car' },
+    { id: 'weather', name: 'Weather', icon: 'partly-sunny' },
+    { id: 'colors', name: 'Colors', icon: 'color-palette' },
+    { id: 'numbers', name: 'Numbers', icon: 'calculator' },
+    { id: 'animals', name: 'Animals', icon: 'paw' },
+    { id: 'time', name: 'Time', icon: 'time' },
+    { id: 'medical', name: 'Health', icon: 'medical' },
+    { id: 'technology', name: 'Tech', icon: 'phone-portrait' }
   ];
 
   useEffect(() => {
