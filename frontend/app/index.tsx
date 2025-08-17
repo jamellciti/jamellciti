@@ -7,12 +7,14 @@ import {
   ScrollView, 
   SafeAreaView,
   Dimensions,
-  Alert
+  Alert,
+  Vibration
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import * as Speech from 'expo-speech';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 const { width, height } = Dimensions.get('window');
 
