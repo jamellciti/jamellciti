@@ -333,6 +333,12 @@ export default function Index() {
         <Text style={styles.headerTitle}>AutismSpeak Pro</Text>
         
         <View style={styles.headerRight}>
+          <TouchableOpacity 
+            style={styles.profileButton}
+            onPress={() => router.push('/profile')}
+          >
+            <Ionicons name="person-circle" size={20} color={colors.text} />
+          </TouchableOpacity>
           {currentUser && (
             <Text style={styles.userName}>{currentUser.name}</Text>
           )}
