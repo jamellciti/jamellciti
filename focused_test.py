@@ -65,6 +65,18 @@ def test_complete_flow():
     invite_code = family["invite_code"]
     print(f"✅ Family created: {family['name']} (Code: {invite_code})")
     
+    # Re-login parent to get updated token with family_id
+    print("\n3️⃣b Re-login Parent to get updated token...")
+    response = requests.post(f"{API_BASE}/auth/login", json=login_data, timeout=10)
+    if response.status_code != 200:
+        print(f"❌ Parent re-login failed: {response.text}")
+        return False
+    
+    login_result = response.json()
+    parent_token = login_result["access_token"]
+    headers = {"Authorization": f"Bearer {parent_token}", "Content-Type": "application/json"}
+    print("✅ Parent re-login successful with updated family info")
+    
     # Step 4: Register Child
     print("\n4️⃣ Registering Child...")
     child_data = {
