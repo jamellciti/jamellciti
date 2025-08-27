@@ -266,6 +266,7 @@ class FamilyTasksAPITester:
         """Test assigning task to child"""
         print("\n🎯 Testing Task Assignment...")
         assignment_data = {
+            "task_id": self.task_id,
             "child_id": self.child_user_id,
             "due_at": (datetime.utcnow() + timedelta(days=1)).isoformat() + "Z"
         }
