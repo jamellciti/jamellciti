@@ -140,6 +140,7 @@ def test_complete_flow():
     # Step 8: Assign Task
     print("\n8️⃣ Assigning Task...")
     assignment_data = {
+        "task_id": task_id,
         "child_id": child_id,
         "due_at": (datetime.utcnow() + timedelta(days=1)).isoformat() + "Z"
     }
