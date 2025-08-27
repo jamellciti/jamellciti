@@ -32,16 +32,18 @@ class FamilyTasksAPITester:
         self.parent_user_id = None
         self.child_user_id = None
         
-        # Test data
+        # Test data with unique emails
+        import time
+        timestamp = str(int(time.time()))
         self.parent_data = {
-            "email": "parent@familytasks.com",
+            "email": f"parent{timestamp}@familytasks.com",
             "password": "ParentPass123!",
             "display_name": "Sarah Johnson",
             "role": "parent"
         }
         
         self.child_data = {
-            "email": "child@familytasks.com", 
+            "email": f"child{timestamp}@familytasks.com", 
             "password": "ChildPass123!",
             "display_name": "Alex Johnson",
             "role": "child"
