@@ -255,7 +255,7 @@ class FamilyTasksAPITester:
         print("\n🎯 Testing Task Assignment...")
         assignment_data = {
             "child_id": self.child_user_id,
-            "due_at": (datetime.utcnow() + timedelta(days=1)).isoformat()
+            "due_at": (datetime.utcnow() + timedelta(days=1)).isoformat() + "Z"
         }
         response = self.make_request("POST", f"/tasks/{self.task_id}/assign", assignment_data, self.parent_token)
         
@@ -267,6 +267,9 @@ class FamilyTasksAPITester:
         else:
             error_msg = response.json().get("detail", "Unknown error") if response else "No response"
             print(f"❌ Task assignment failed: {error_msg}")
+            if response:
+                print(f"Status code: {response.status_code}")
+                print(f"Response: {response.text}")
             return False
     
     def test_get_task_instances_child(self):
