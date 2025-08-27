@@ -415,7 +415,9 @@ class FamilyTasksAPITester:
         if response and response.status_code == 403:
             print("✅ Child correctly denied task creation")
         else:
-            print("❌ Child should not be able to create tasks")
+            print(f"❌ Child should not be able to create tasks (got {response.status_code if response else 'no response'})")
+            if response:
+                print(f"Response: {response.text}")
             return False
         
         # Test parent trying to access child wallet (should fail)
@@ -424,7 +426,9 @@ class FamilyTasksAPITester:
             print("✅ Parent correctly denied wallet access")
             return True
         else:
-            print("❌ Parent should not be able to access child wallet")
+            print(f"❌ Parent should not be able to access child wallet (got {response.status_code if response else 'no response'})")
+            if response:
+                print(f"Response: {response.text}")
             return False
     
     def run_all_tests(self):
