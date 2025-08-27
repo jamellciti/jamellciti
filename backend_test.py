@@ -151,6 +151,18 @@ class FamilyTasksAPITester:
             self.family_id = family_data.get("id")
             self.invite_code = family_data.get("invite_code")
             print(f"✅ Family created: {family_data['name']} (Code: {self.invite_code})")
+            
+            # Re-login parent to get updated token with family_id
+            login_data = {
+                "email": self.parent_data["email"],
+                "password": self.parent_data["password"]
+            }
+            response = self.make_request("POST", "/auth/login", login_data)
+            if response and response.status_code == 200:
+                data = response.json()
+                self.parent_token = data.get("access_token")
+                print("✅ Parent token updated with family info")
+            
             return True
         else:
             error_msg = response.json().get("detail", "Unknown error") if response else "No response"
