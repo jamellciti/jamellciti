@@ -72,17 +72,23 @@ class FamilyTasksAPITester:
             
         try:
             if method == "GET":
-                response = requests.get(url, headers=headers)
+                response = requests.get(url, headers=headers, timeout=10)
             elif method == "POST":
-                response = requests.post(url, headers=headers, json=data)
+                response = requests.post(url, headers=headers, json=data, timeout=10)
             elif method == "PUT":
-                response = requests.put(url, headers=headers, json=data)
+                response = requests.put(url, headers=headers, json=data, timeout=10)
             elif method == "DELETE":
-                response = requests.delete(url, headers=headers)
+                response = requests.delete(url, headers=headers, timeout=10)
             else:
                 raise ValueError(f"Unsupported method: {method}")
                 
             return response
+        except requests.exceptions.Timeout:
+            print(f"❌ Request timeout for {method} {url}")
+            return None
+        except requests.exceptions.ConnectionError:
+            print(f"❌ Connection error for {method} {url}")
+            return None
         except Exception as e:
             print(f"❌ Request failed: {e}")
             return None
